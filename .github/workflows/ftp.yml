@@ -18,6 +18,8 @@ jobs:
       run: npm install
     - name: 🏗 Build Project
       run: npm run build:test
+    - name: 🔍 Check Astro types
+      run: npm run astro check
       env:
         WP_API_URL: ${{ secrets.WP_API_URL }}
     - name: 📂 Sync files to FTP
