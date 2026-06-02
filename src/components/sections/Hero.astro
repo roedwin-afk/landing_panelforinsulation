@@ -1,0 +1,440 @@
+---
+import { ArrowRight, Download, Layers } from "lucide-astro";
+import type { TranslationKeys } from "../../i18n/en";
+import type { Lang } from "../../i18n/utils";
+
+interface Props {
+  t: TranslationKeys;
+  lang: Lang;
+}
+
+const { t, lang } = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+const prefix = lang === "es" ? `${base}es/` : base;
+---
+
+<section class="hero">
+  <!-- Background layers -->
+  <div class="hero__bg">
+    <div class="hero__bg-orb hero__bg-orb--orange"></div>
+    <div class="hero__bg-orb hero__bg-orb--green"></div>
+    <div class="hero__bg-grid"></div>
+  </div>
+
+  <div class="container hero__container">
+
+    <!-- Badge -->
+    <div class="hero__badge reveal">
+      <span class="hero__badge-dot"></span>
+      {t.hero.badge}
+    </div>
+
+    <!-- Headline -->
+    <div class="hero__headline reveal">
+      <h1 class="hero__title">
+        {t.hero.title1}
+        <br />
+        <span class="hero__title-gradient">{t.hero.title2}</span>
+      </h1>
+      <p class="hero__description">{t.hero.description}</p>
+    </div>
+
+    <!-- CTA row -->
+    <div class="hero__actions reveal">
+      <a href={`${prefix}#calculator`} class="hero__btn-primary">
+        {t.hero.ctaPrimary}
+        <ArrowRight size={18} />
+      </a>
+      <a href={`${prefix}#what-is`} class="hero__btn-secondary">
+        {t.hero.ctaSecondary}
+      </a>
+    </div>
+
+    <!-- Stats + Card row -->
+    <div class="hero__bottom reveal">
+
+      <!-- Stats -->
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <p class="hero__stat-value">{t.hero.stat1Value}</p>
+          <p class="hero__stat-label">{t.hero.stat1Label}</p>
+        </div>
+        <div class="hero__stat-divider"></div>
+        <div class="hero__stat">
+          <p class="hero__stat-value">{t.hero.stat2Value}</p>
+          <p class="hero__stat-label">{t.hero.stat2Label}</p>
+        </div>
+        <div class="hero__stat-divider"></div>
+        <div class="hero__stat">
+          <p class="hero__stat-value">{t.hero.stat3Value}</p>
+          <p class="hero__stat-label">{t.hero.stat3Label}</p>
+        </div>
+      </div>
+
+      <!-- Buyer tip card -->
+      <div class="hero__card">
+        <div class="hero__card-header">
+          <div class="hero__card-icon">
+            <Layers size={18} />
+          </div>
+          <span class="hero__card-tag">Buyer Tip</span>
+        </div>
+        <h3 class="hero__card-title">{t.hero.cardTitle}</h3>
+        <p class="hero__card-desc">{t.hero.cardDesc}</p>
+        <div class="hero__card-items">
+          <div class="hero__card-item">
+            <span class="hero__card-item-name">{t.hero.cardPir}</span>
+            <span class="hero__card-item-label hero__card-item-label--green">
+              {t.hero.cardPirLabel}
+            </span>
+          </div>
+          <div class="hero__card-item">
+            <span class="hero__card-item-name">{t.hero.cardWool}</span>
+            <span class="hero__card-item-label hero__card-item-label--orange">
+              {t.hero.cardWoolLabel}
+            </span>
+          </div>
+        </div>
+        <a href={`${prefix}#what-is`} class="hero__card-cta">
+          {t.hero.cardCta}
+          <ArrowRight size={14} />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ── Section ── */
+  .hero {
+    position: relative;
+    background: linear-gradient(160deg, var(--color-slate-900) 0%, var(--color-slate-950) 100%);
+    color: white;
+    overflow: hidden;
+    padding-block: var(--space-20);
+  }
+
+  @media (min-width: 768px) {
+    .hero {
+      padding-block: 7rem;
+    }
+  }
+
+  /* ── Background ── */
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .hero__bg-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.12;
+  }
+
+  .hero__bg-orb--orange {
+    width: 40rem;
+    height: 40rem;
+    background: var(--color-thermal-500);
+    top: -10rem;
+    right: -10rem;
+  }
+
+  .hero__bg-orb--green {
+    width: 30rem;
+    height: 30rem;
+    background: var(--color-brand-600);
+    bottom: -8rem;
+    left: -8rem;
+  }
+
+  .hero__bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgb(255 255 255 / 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* ── Container layout ── */
+  .hero__container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-10);
+  }
+
+  /* ── Badge ── */
+  .hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-1) var(--space-3);
+    background: rgb(255 255 255 / 0.08);
+    border: 1px solid rgb(255 255 255 / 0.15);
+    border-radius: var(--radius-full);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-brand-100);
+    width: fit-content;
+  }
+
+  .hero__badge-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--color-brand-500);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* ── Headline ── */
+  .hero__headline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    max-width: 54rem;
+  }
+
+  .hero__title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+
+  .hero__title-gradient {
+    background: linear-gradient(
+      90deg,
+      var(--color-brand-400),
+      var(--color-thermal-400)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero__description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--color-slate-300);
+    max-width: 42rem;
+  }
+
+  /* ── Actions ── */
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .hero__btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-6);
+    background: var(--color-thermal-500);
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: var(--radius-md);
+    transition: background 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 4px 20px rgb(249 115 22 / 0.3);
+  }
+
+  .hero__btn-primary:hover {
+    background: var(--color-thermal-600);
+    transform: translateY(-1px);
+  }
+
+  .hero__btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-3) var(--space-6);
+    background: rgb(255 255 255 / 0.08);
+    border: 1px solid rgb(255 255 255 / 0.12);
+    color: var(--color-slate-200);
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: var(--radius-md);
+    transition: background 0.2s ease;
+  }
+
+  .hero__btn-secondary:hover {
+    background: rgb(255 255 255 / 0.14);
+  }
+
+  /* ── Bottom row ── */
+  .hero__bottom {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    padding-top: var(--space-8);
+    border-top: 1px solid rgb(255 255 255 / 0.08);
+  }
+
+  @media (min-width: 768px) {
+    .hero__bottom {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+  }
+
+  /* ── Stats ── */
+  .hero__stats {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+  }
+
+  .hero__stat-value {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--color-brand-400);
+    letter-spacing: -0.02em;
+  }
+
+  .hero__stat-label {
+    font-size: 0.7rem;
+    color: var(--color-slate-400);
+    margin-top: 2px;
+    max-width: 8rem;
+    line-height: 1.4;
+  }
+
+  .hero__stat-divider {
+    width: 1px;
+    height: 2.5rem;
+    background: rgb(255 255 255 / 0.1);
+    flex-shrink: 0;
+  }
+
+  /* ── Buyer tip card ── */
+  .hero__card {
+    background: rgb(255 255 255 / 0.05);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    width: 100%;
+    backdrop-filter: blur(8px);
+  }
+
+  @media (min-width: 768px) {
+    .hero__card {
+      max-width: 22rem;
+      flex-shrink: 0;
+    }
+  }
+
+  .hero__card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .hero__card-icon {
+    width: 2rem;
+    height: 2rem;
+    background: rgb(22 163 74 / 0.15);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-brand-400);
+  }
+
+  .hero__card-tag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: var(--color-thermal-500);
+    color: white;
+    padding: 2px var(--space-2);
+    border-radius: var(--radius-full);
+  }
+
+  .hero__card-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: white;
+  }
+
+  .hero__card-desc {
+    font-size: 0.78rem;
+    color: var(--color-slate-300);
+    line-height: 1.6;
+  }
+
+  .hero__card-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .hero__card-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-2) var(--space-3);
+    background: rgb(255 255 255 / 0.04);
+    border-radius: var(--radius-sm);
+    gap: var(--space-2);
+  }
+
+  .hero__card-item-name {
+    font-size: 0.72rem;
+    color: var(--color-slate-300);
+    font-weight: 500;
+  }
+
+  .hero__card-item-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .hero__card-item-label--green {
+    color: var(--color-brand-400);
+  }
+
+  .hero__card-item-label--orange {
+    color: var(--color-thermal-400);
+  }
+
+  .hero__card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: rgb(255 255 255 / 0.6);
+    padding: var(--space-2) var(--space-3);
+    background: rgb(255 255 255 / 0.06);
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .hero__card-cta:hover {
+    background: rgb(255 255 255 / 0.1);
+    color: white;
+  }
+</style>

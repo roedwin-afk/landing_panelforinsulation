@@ -1,0 +1,218 @@
+---
+import NavLinks from "../ui/NavLinks.astro";
+import MobileMenu from "./MobileMenu.astro";
+import type { TranslationKeys } from "../../i18n/en";
+import type { Lang } from "../../i18n/utils";
+import { Layers } from "lucide-astro";
+
+interface Props {
+  t: TranslationKeys;
+  lang: Lang;
+}
+
+const { t, lang } = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+const prefix = lang === "es" ? `${base}es/` : base;
+const alternateLang = lang === "en" ? "es" : "en";
+const alternatePath = lang === "en" ? `${base}es/` : base;
+---
+
+<header class="navbar">
+  <div class="container navbar__inner">
+
+    <!-- Logo -->
+    <a href={prefix} class="navbar__logo">
+      <div class="navbar__logo-icon">
+        <Layers size={22} />
+      </div>
+      <div>
+        <span class="navbar__logo-text">
+          panel<span class="navbar__logo-accent">for</span>insulation<span class="navbar__logo-dot">.com</span>
+        </span>
+        <p class="navbar__logo-sub">The Buyer's Knowledge Hub</p>
+      </div>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="navbar__nav" aria-label="Main navigation">
+      <NavLinks t={t} lang={lang} variant="navbar" />
+    </nav>
+
+    <!-- Right actions -->
+    <div class="navbar__actions">
+      <!-- Language switcher -->
+      <a href={alternatePath} class="navbar__lang-switch" aria-label="Switch language">
+        {alternateLang.toUpperCase()}
+      </a>
+
+      <!-- CTA -->
+      <a href={`${prefix}#download-guide`} class="navbar__cta">
+        {t.nav.cta}
+      </a>
+
+      <!-- Mobile toggle -->
+      <button
+        id="mobile-menu-toggle"
+        class="navbar__toggle"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu montado fuera del header -->
+<MobileMenu t={t} lang={lang} />
+
+<style>
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgb(255 255 255 / 0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-slate-100);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .navbar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 5rem;
+  }
+
+  /* ── Logo ── */
+  .navbar__logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    text-decoration: none;
+  }
+
+  .navbar__logo-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    background: var(--color-brand-600);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 4px 12px rgb(22 163 74 / 0.25);
+    flex-shrink: 0;
+  }
+
+  .navbar__logo-text {
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--color-slate-900);
+  }
+
+  .navbar__logo-accent {
+    color: var(--color-brand-600);
+  }
+
+  .navbar__logo-dot {
+    color: var(--color-thermal-500);
+  }
+
+  .navbar__logo-sub {
+    font-size: 0.625rem;
+    color: var(--color-slate-400);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    margin-top: 1px;
+  }
+
+  /* ── Desktop nav ── */
+  .navbar__nav {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .navbar__nav {
+      display: block;
+    }
+  }
+
+  /* ── Actions ── */
+  .navbar__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .navbar__lang-switch {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-slate-500);
+    padding: var(--space-1) var(--space-2);
+    border: 1px solid var(--color-slate-200);
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+    letter-spacing: 0.05em;
+  }
+
+  .navbar__lang-switch:hover {
+    color: var(--color-brand-600);
+    border-color: var(--color-brand-600);
+  }
+
+  .navbar__cta {
+    display: none;
+    padding: var(--space-2) var(--space-4);
+    background: var(--color-brand-600);
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 8px rgb(22 163 74 / 0.25);
+  }
+
+  .navbar__cta:hover {
+    background: var(--color-brand-700);
+    box-shadow: 0 4px 16px rgb(22 163 74 / 0.3);
+  }
+
+  @media (min-width: 640px) {
+    .navbar__cta {
+      display: inline-flex;
+      align-items: center;
+    }
+  }
+
+  /* ── Mobile toggle ── */
+  .navbar__toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: var(--space-2);
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  @media (min-width: 768px) {
+    .navbar__toggle {
+      display: none;
+    }
+  }
+
+  .navbar__toggle-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--color-slate-700);
+    border-radius: 2px;
+    transition: all 0.2s ease;
+  }
+</style>

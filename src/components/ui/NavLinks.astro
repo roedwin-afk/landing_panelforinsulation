@@ -1,0 +1,95 @@
+---
+import type { TranslationKeys } from "../../i18n/en";
+import type { Lang } from "../../i18n/utils";
+
+interface Props {
+  t: TranslationKeys;
+  lang: Lang;
+  variant?: "navbar" | "footer" | "mobile";
+}
+
+const { t, lang, variant = "navbar" } = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+const prefix = lang === "es" ? `${base}es/` : base;
+
+const links = [
+  { href: `${prefix}#what-is`, label: t.nav.whatIs },
+  { href: `${prefix}#benefits`, label: t.nav.benefits },
+  { href: `${prefix}#calculator`, label: t.nav.calculator },
+  { href: `${prefix}#trends`, label: t.nav.trends },
+];
+---
+
+<ul class={`nav-links nav-links--${variant}`} role="list">
+  {
+    links.map((link) => (
+      <li>
+        <a href={link.href} class="nav-link">
+          {link.label}
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .nav-links {
+    list-style: none;
+  }
+
+  /* ── Navbar variant ── */
+  .nav-links--navbar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+  }
+
+  .nav-links--navbar .nav-link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-slate-600);
+    transition: color 0.2s ease;
+  }
+
+  .nav-links--navbar .nav-link:hover {
+    color: var(--color-brand-600);
+  }
+
+  /* ── Mobile variant ── */
+  .nav-links--mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav-links--mobile .nav-link {
+    display: block;
+    padding-block: var(--space-3);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-slate-600);
+    transition: color 0.2s ease;
+  }
+
+  .nav-links--mobile .nav-link:hover {
+    color: var(--color-brand-600);
+  }
+
+  /* ── Footer variant ── */
+  .nav-links--footer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .nav-links--footer .nav-link {
+    font-size: 0.75rem;
+    color: var(--color-slate-500);
+    transition: color 0.2s ease;
+  }
+
+  .nav-links--footer .nav-link:hover {
+    color: white;
+  }
+</style>

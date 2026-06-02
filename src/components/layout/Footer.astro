@@ -1,0 +1,251 @@
+---
+import { Layers } from "lucide-astro";
+import NavLinks from "../ui/NavLinks.astro";
+import type { TranslationKeys } from "../../i18n/en";
+import type { Lang } from "../../i18n/utils";
+
+interface Props {
+  t: TranslationKeys;
+  lang: Lang;
+}
+
+const { t, lang } = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+const prefix = lang === "es" ? `${base}es/` : base;
+
+const networks = [
+  { label: "thermalsandwichpanels.com", href: "#" },
+  { label: "eurosandwichpanels.com", href: "#" },
+  { label: "thermalinsulationpanels.com", href: "#" },
+];
+
+const resources = [
+  { label: t.footer.links.coreComparison, href: `${prefix}#what-is` },
+  { label: t.footer.links.calculator, href: `${prefix}#calculator` },
+  { label: t.footer.links.standards, href: `${prefix}#download-guide` },
+];
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+
+    <!-- Top grid -->
+    <div class="footer__grid">
+
+      <!-- Brand col -->
+      <div class="footer__brand">
+        <a href={prefix} class="footer__logo">
+          <div class="footer__logo-icon">
+            <Layers size={18} />
+          </div>
+          <span class="footer__logo-text">
+            panelforinsulation<span class="footer__logo-dot">.com</span>
+          </span>
+        </a>
+        <p class="footer__description">{t.footer.description}</p>
+
+        <!-- Nav links en footer -->
+        <div class="footer__nav">
+          <NavLinks t={t} lang={lang} variant="footer" />
+        </div>
+      </div>
+
+      <!-- Networks col -->
+      <div class="footer__col">
+        <h4 class="footer__col-title">{t.footer.networksTitle}</h4>
+        <ul class="footer__list" role="list">
+          {
+            networks.map((n) => (
+              <li>
+                <a href={n.href} class="footer__link">
+                  {n.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Resources col -->
+      <div class="footer__col">
+        <h4 class="footer__col-title">{t.footer.resourcesTitle}</h4>
+        <ul class="footer__list" role="list">
+          {
+            resources.map((r) => (
+              <li>
+                <a href={r.href} class="footer__link footer__link--accent">
+                  {r.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer__bottom">
+      <p class="footer__copyright">
+        &copy; {year} panelforinsulation.com. {t.footer.copyright}
+      </p>
+      <div class="footer__legal">
+        <a href="#" class="footer__legal-link">Privacy Policy</a>
+        <a href="#" class="footer__legal-link">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-slate-950);
+    color: var(--color-slate-400);
+    padding-block: var(--space-16) var(--space-8);
+    border-top: 1px solid var(--color-slate-900);
+  }
+
+  /* ── Grid ── */
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+    margin-bottom: var(--space-10);
+  }
+
+  @media (min-width: 768px) {
+    .footer__grid {
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: var(--space-8);
+    }
+  }
+
+  /* ── Brand ── */
+  .footer__brand {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .footer__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    text-decoration: none;
+  }
+
+  .footer__logo-icon {
+    width: 2rem;
+    height: 2rem;
+    background: var(--color-brand-600);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .footer__logo-text {
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: white;
+  }
+
+  .footer__logo-dot {
+    color: var(--color-thermal-500);
+  }
+
+  .footer__description {
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: var(--color-slate-500);
+    max-width: 28rem;
+  }
+
+  .footer__nav {
+    margin-top: var(--space-2);
+  }
+
+  /* ── Columns ── */
+  .footer__col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .footer__col-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .footer__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .footer__link {
+    font-size: 0.75rem;
+    color: var(--color-slate-500);
+    transition: color 0.2s ease;
+  }
+
+  .footer__link:hover {
+    color: white;
+  }
+
+  .footer__link--accent {
+    color: var(--color-slate-400);
+  }
+
+  .footer__link--accent:hover {
+    color: var(--color-brand-400);
+  }
+
+  /* ── Bottom bar ── */
+  .footer__bottom {
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--color-slate-900);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    align-items: center;
+    text-align: center;
+  }
+
+  @media (min-width: 640px) {
+    .footer__bottom {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+  }
+
+  .footer__copyright {
+    font-size: 0.75rem;
+    color: var(--color-slate-600);
+  }
+
+  .footer__legal {
+    display: flex;
+    gap: var(--space-4);
+  }
+
+  .footer__legal-link {
+    font-size: 0.75rem;
+    color: var(--color-slate-600);
+    transition: color 0.2s ease;
+  }
+
+  .footer__legal-link:hover {
+    color: var(--color-slate-400);
+  }
+</style>

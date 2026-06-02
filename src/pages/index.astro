@@ -1,17 +1,18 @@
 ---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/layout/Navbar.astro";
+import Footer from "../components/layout/Footer.astro";
+import Hero from "../components/sections/Hero.astro";
+import { getLang, useTranslations } from "../i18n/utils";
 
+const lang = getLang(Astro.url, import.meta.env.BASE_URL);
+const t = useTranslations(lang);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout t={t} lang={lang}>
+  <Navbar t={t} lang={lang} />
+  <main>
+    <Hero t={t} lang={lang} />
+  </main>
+  <Footer t={t} lang={lang} />
+</Layout>
