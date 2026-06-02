@@ -9,9 +9,16 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "build:prod": "cross-env SITE=https://landing.mequipo.com BASE=/ astro build",
+    "build:test": "cross-env SITE=https://landing.mequipo.com BASE=/landings/panelforinsulation/ astro build"
   },
   "dependencies": {
-    "astro": "^6.4.2"
+    "@astrojs/check": "^0.9.9",
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^6.4.2",
+    "cross-env": "^10.1.0",
+    "lucide-astro": "^0.556.0",
+    "typescript": "^6.0.3"
   }
 }
