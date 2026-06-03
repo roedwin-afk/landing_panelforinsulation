@@ -1,0 +1,39 @@
+---
+// No props necesarios — este componente solo inyecta el script global
+---
+
+<script>
+  function initScrollReveal() {
+    const elements = document.querySelectorAll<HTMLElement>(".reveal");
+
+    if (!elements.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -48px 0px",
+      }
+    );
+
+    elements.forEach((el, i) => {
+      // Stagger delay basado en el índice del data attribute o posición
+      const delay = el.dataset.delay ?? String(i * 80);
+      el.style.transitionDelay = `${delay}ms`;
+      observer.observe(el);
+    });
+  }
+
+  // Carga normal
+  initScrollReveal();
+
+  // Después de view transitions
+  document.addEventListener("astro:page-load", initScrollReveal);
+</script>

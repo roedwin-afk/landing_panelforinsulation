@@ -1,0 +1,395 @@
+---
+import { ShieldCheck, Flame, Activity } from "lucide-astro";
+import type { TranslationKeys } from "../../i18n/en";
+import type { Lang } from "../../i18n/utils";
+
+interface Props {
+  t: TranslationKeys;
+  lang: Lang;
+}
+
+const { t } = Astro.props;
+
+const layers = [
+  {
+    key: "top",
+    icon: "shield",
+    color: "slate",
+    label: t.whatIs.layers.top.title,
+    badge: t.whatIs.layers.top.badge,
+    desc: t.whatIs.layers.top.desc,
+    stat1: t.whatIs.layers.top.stat1,
+    stat2: t.whatIs.layers.top.stat2,
+  },
+  {
+    key: "mid",
+    icon: "flame",
+    color: "thermal",
+    label: t.whatIs.layers.mid.title,
+    badge: t.whatIs.layers.mid.badge,
+    desc: t.whatIs.layers.mid.desc,
+    stat1: t.whatIs.layers.mid.stat1,
+    stat2: t.whatIs.layers.mid.stat2,
+  },
+  {
+    key: "bot",
+    icon: "activity",
+    color: "brand",
+    label: t.whatIs.layers.bot.title,
+    badge: t.whatIs.layers.bot.badge,
+    desc: t.whatIs.layers.bot.desc,
+    stat1: t.whatIs.layers.bot.stat1,
+    stat2: t.whatIs.layers.bot.stat2,
+  },
+];
+---
+
+<section id="what-is" class="whatis">
+  <div class="container">
+
+    <!-- Header -->
+    <div class="whatis__header reveal">
+      <span class="whatis__badge">{t.whatIs.badge}</span>
+      <h2 class="whatis__title">{t.whatIs.title}</h2>
+      <p class="whatis__desc">{t.whatIs.description}</p>
+    </div>
+
+    <!-- Interactive panel -->
+    <div class="whatis__panel reveal" data-delay="120">
+
+      <!-- Visual: sandwich stack -->
+      <div class="whatis__stack">
+        <p class="whatis__stack-hint">{t.whatIs.interactiveHint}</p>
+
+        <div class="whatis__layers">
+          <!-- Top steel -->
+          <button
+            class="whatis__layer whatis__layer--steel"
+            data-layer="0"
+            aria-pressed="false"
+          >
+            <ShieldCheck size={18} />
+            <span>{t.whatIs.layers.top.title}</span>
+          </button>
+
+          <!-- Core -->
+          <button
+            class="whatis__layer whatis__layer--core"
+            data-layer="1"
+            aria-pressed="true"
+          >
+            <Flame size={20} />
+            <span>{t.whatIs.layers.mid.title}</span>
+          </button>
+
+          <!-- Bottom steel -->
+          <button
+            class="whatis__layer whatis__layer--steel"
+            data-layer="2"
+            aria-pressed="false"
+          >
+            <Activity size={18} />
+            <span>{t.whatIs.layers.bot.title}</span>
+          </button>
+        </div>
+
+        <!-- Cross section label -->
+        <div class="whatis__cross-label">
+          <span class="whatis__cross-line"></span>
+          <span class="whatis__cross-text">Cross Section View</span>
+          <span class="whatis__cross-line"></span>
+        </div>
+      </div>
+
+      <!-- Detail panel -->
+      <div class="whatis__detail">
+        {layers.map((layer, i) => (
+          <div
+            class={`whatis__detail-item ${i === 1 ? "is-active" : ""}`}
+            data-detail={i}
+          >
+            <span class={`whatis__detail-badge whatis__detail-badge--${layer.color}`}>
+              {layer.badge}
+            </span>
+            <h3 class="whatis__detail-title">{layer.label}</h3>
+            <p class="whatis__detail-desc">{layer.desc}</p>
+            <div class="whatis__detail-stats">
+              <div class="whatis__detail-stat">
+                <p class="whatis__detail-stat-label">Specification</p>
+                <p class="whatis__detail-stat-value">{layer.stat1}</p>
+              </div>
+              <div class="whatis__detail-stat">
+                <p class="whatis__detail-stat-label">Key Feature</p>
+                <p class="whatis__detail-stat-value">{layer.stat2}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .whatis {
+    padding-block: var(--space-20);
+    background: white;
+  }
+
+  /* ── Header ── */
+  .whatis__header {
+    text-align: center;
+    max-width: 42rem;
+    margin-inline: auto;
+    margin-bottom: var(--space-16);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .whatis__badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-brand-600);
+  }
+
+  .whatis__title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    color: var(--color-slate-900);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .whatis__desc {
+    font-size: 1rem;
+    color: var(--color-slate-600);
+    line-height: 1.7;
+  }
+
+  /* ── Panel: two columns ── */
+  .whatis__panel {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .whatis__panel {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-12);
+    }
+  }
+
+  /* ── Stack (left) ── */
+  .whatis__stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .whatis__stack-hint {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    color: var(--color-slate-400);
+    text-align: center;
+  }
+
+  .whatis__layers {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+  }
+
+  /* Steel layers */
+  .whatis__layer {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-6);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: none;
+    text-align: left;
+    width: 100%;
+    font-family: inherit;
+  }
+
+  .whatis__layer--steel {
+    background: linear-gradient(135deg, #64748b, #475569);
+    color: white;
+    padding-block: var(--space-5);
+  }
+
+  .whatis__layer--steel[aria-pressed="true"],
+  .whatis__layer--steel:hover {
+    background: linear-gradient(135deg, #334155, #1e293b);
+    padding-inline-start: var(--space-8);
+  }
+
+  /* Core layer */
+  .whatis__layer--core {
+    background: linear-gradient(135deg, var(--color-thermal-500), #f59e0b);
+    color: white;
+    padding-block: var(--space-8);
+    font-size: 0.9rem;
+  }
+
+  .whatis__layer--core[aria-pressed="true"],
+  .whatis__layer--core:hover {
+    background: linear-gradient(135deg, var(--color-thermal-600), #d97706);
+    padding-inline-start: var(--space-8);
+  }
+
+  /* Cross section label */
+  .whatis__cross-label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: var(--space-2);
+  }
+
+  .whatis__cross-line {
+    flex: 1;
+    height: 1px;
+    background: var(--color-slate-200);
+  }
+
+  .whatis__cross-text {
+    font-size: 0.65rem;
+    color: var(--color-slate-400);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+
+  /* ── Detail panel (right) ── */
+  .whatis__detail {
+    position: relative;
+    min-height: 280px;
+  }
+
+  .whatis__detail-item {
+    display: none;
+    flex-direction: column;
+    gap: var(--space-4);
+    animation: fadeUp 0.3s ease;
+  }
+
+  .whatis__detail-item.is-active {
+    display: flex;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .whatis__detail-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 3px var(--space-3);
+    border-radius: var(--radius-full);
+    width: fit-content;
+  }
+
+  .whatis__detail-badge--slate {
+    background: var(--color-slate-100);
+    color: var(--color-slate-700);
+  }
+
+  .whatis__detail-badge--thermal {
+    background: var(--color-thermal-50);
+    color: var(--color-thermal-700);
+  }
+
+  .whatis__detail-badge--brand {
+    background: var(--color-brand-100);
+    color: var(--color-brand-700);
+  }
+
+  .whatis__detail-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--color-slate-900);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .whatis__detail-desc {
+    font-size: 0.92rem;
+    color: var(--color-slate-600);
+    line-height: 1.75;
+  }
+
+  .whatis__detail-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-slate-100);
+    margin-top: var(--space-2);
+  }
+
+  .whatis__detail-stat-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-slate-400);
+    margin-bottom: var(--space-1);
+  }
+
+  .whatis__detail-stat-value {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-slate-800);
+    line-height: 1.4;
+  }
+</style>
+
+<script>
+  function initWhatIs() {
+    const layers = document.querySelectorAll<HTMLButtonElement>(".whatis__layer");
+    const details = document.querySelectorAll<HTMLDivElement>(".whatis__detail-item");
+
+    if (!layers.length) return;
+
+    layers.forEach((btn, i) => {
+      btn.addEventListener("click", () => {
+        // Update buttons
+        layers.forEach((b) => b.setAttribute("aria-pressed", "false"));
+        btn.setAttribute("aria-pressed", "true");
+
+        // Update detail panels
+        details.forEach((d) => d.classList.remove("is-active"));
+        details[i]?.classList.add("is-active");
+      });
+    });
+  }
+
+  initWhatIs();
+  document.addEventListener("astro:page-load", initWhatIs);
+</script>

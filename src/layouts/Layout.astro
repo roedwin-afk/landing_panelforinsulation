@@ -1,7 +1,10 @@
 ---
+import Navbar from "../components/layout/Navbar.astro";
+import Footer from "../components/layout/Footer.astro";
 import { ClientRouter } from "astro:transitions";
 import type { TranslationKeys } from "../i18n/en";
 import type { Lang } from "../i18n/utils";
+import ScrollReveal from "../components/ui/ScrollReveal.astro";
 
 interface Props {
   t: TranslationKeys;
@@ -229,6 +232,9 @@ const pageDesc =
     </style>
   </head>
   <body>
+    <Navbar t={t} lang={lang} />
     <slot />
+    <Footer t={t} lang={lang} />
+    <ScrollReveal />
   </body>
 </html>
