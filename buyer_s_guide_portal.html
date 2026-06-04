@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel For Insulation | Ultimate Buyer's Guide & Thermal Insights</title>
+    <!-- Tailwind CSS para diseño rápido y responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            900: '#14532d',
+                        },
+                        thermal: {
+                            50: '#fff7ed',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                        },
+                        slate: {
+                            900: '#0f172a',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Animaciones personalizadas para la vista explotada del panel sándwich */
+        .layer-transition {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-slate-100 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logotipo -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center text-white shadow-md shadow-brand-100">
+                        <i data-lucide="layers" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold tracking-tight text-slate-900">
+                            panel<span class="text-brand-600">for</span>insulation<span class="text-thermal-500">.com</span>
+                        </span>
+                        <p class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold">The Buyer's Knowledge Hub</p>
+                    </div>
+                </div>
+
+                <!-- Enlaces de navegación rápida (Estilo Blog/Educativo) -->
+                <nav class="hidden md:flex items-center gap-8">
+                    <a href="#what-is" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">What is a Panel?</a>
+                    <a href="#benefits" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Benefits</a>
+                    <a href="#calculator" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Thickness Tool</a>
+                    <a href="#trends" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Sustainability Trends</a>
+                </nav>
+
+                <!-- Botón de Acción Principal (Captación de tráfico/Lead) -->
+                <div class="flex items-center gap-4">
+                    <a href="#download-guide" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 transition-all rounded-xl shadow-md hover:shadow-lg shadow-brand-100">
+                        Free Buyer's Guide <i data-lucide="download" class="w-4 h-4 ml-2"></i>
+                    </a>
+                    <!-- Menú Móvil (Toggle) -->
+                    <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-600 hover:text-slate-900 focus:outline-none" aria-label="Toggle menu">
+                        <i data-lucide="menu" class="w-6 h-6" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menú Móvil Desplegable -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 py-4 px-6 space-y-3 shadow-lg">
+            <a href="#what-is" class="block text-base font-medium text-slate-600 hover:text-brand-600 py-2">What is a Panel?</a>
+            <a href="#benefits" class="block text-base font-medium text-slate-600 hover:text-brand-600 py-2">Benefits</a>
+            <a href="#calculator" class="block text-base font-medium text-slate-600 hover:text-brand-600 py-2">Thickness Tool</a>
+            <a href="#trends" class="block text-base font-medium text-slate-600 hover:text-brand-600 py-2">Sustainability Trends</a>
+            <a href="#download-guide" class="block w-full text-center px-4 py-3 text-sm font-semibold text-white bg-brand-600 rounded-xl">
+                Download Free Guide
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- HERO SECTION: Atractiva, educativa, enfocada en resolver dudas del usuario -->
+        <section class="relative bg-gradient-to-b from-slate-900 to-slate-950 text-white overflow-hidden py-16 sm:py-24">
+            <!-- Fondo abstracto simulando transferencia de calor/aislamiento -->
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute -top-40 -right-40 w-96 h-96 bg-thermal-500 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-brand-600 rounded-full blur-3xl"></div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid lg:grid-cols-12 gap-12 items-center">
+                    <!-- Texto Principal -->
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/10 rounded-full border border-white/20 text-xs font-semibold text-brand-100 uppercase tracking-wider">
+                            <span class="flex h-2 w-2 rounded-full bg-brand-500 animate-pulse"></span>
+                            Smart Construction Portal
+                        </div>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-none">
+                            The Ultimate Guide to <br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-thermal-400">
+                                Sandwich Panels
+                            </span>
+                        </h1>
+                        <p class="text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0">
+                            Thinking about insulation for your next building project? Learn how insulated sandwich panels work, discover energy-saving secrets, and choose the perfect thickness with our interactive builder.
+                        </p>
+                        <!-- Acciones Rápidas -->
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+                            <a href="#calculator" class="inline-flex items-center justify-center px-6 py-3.5 text-base font-semibold text-white bg-thermal-500 hover:bg-thermal-600 transition-all rounded-xl shadow-lg shadow-thermal-900/30">
+                                Try Thickness Calculator <i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i>
+                            </a>
+                            <a href="#what-is" class="inline-flex items-center justify-center px-6 py-3.5 text-base font-semibold text-slate-200 bg-white/10 hover:bg-white/20 border border-white/10 rounded-xl transition-all">
+                                Learn the Basics First
+                            </a>
+                        </div>
+                        <!-- Métricas Rápidas -->
+                        <div class="grid grid-cols-3 gap-6 pt-8 border-t border-white/10 max-w-md mx-auto lg:mx-0 text-left">
+                            <div>
+                                <p class="text-2xl sm:text-3xl font-extrabold text-brand-400">Up to 40%</p>
+                                <p class="text-xs text-slate-400">Heating/Cooling Savings</p>
+                            </div>
+                            <div>
+                                <p class="text-2xl sm:text-3xl font-extrabold text-brand-400">100%</p>
+                                <p class="text-xs text-slate-400">Recyclable Cores</p>
+                            </div>
+                            <div>
+                                <p class="text-2xl sm:text-3xl font-extrabold text-brand-400">Zero</p>
+                                <p class="text-xs text-slate-400">Moisture Penetration</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gráfico Interactivo de Hero / Card Educativo -->
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="bg-white/5 border border-white/10 backdrop-blur-lg p-6 sm:p-8 rounded-3xl w-full max-w-md shadow-2xl relative">
+                            <div class="absolute -top-3 -right-3 bg-thermal-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow">
+                                Buyer Tip
+                            </div>
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="p-2 bg-brand-500/15 rounded-lg text-brand-400">
+                                    <i data-lucide="help-circle" class="w-6 h-6"></i>
+                                </div>
+                                <h3 class="text-lg font-bold">Confused about materials?</h3>
+                            </div>
+                            <p class="text-sm text-slate-300 mb-4 leading-relaxed">
+                                Not all insulation cores are built equal. PUR, PIR, and Mineral Wool offer radically different fire-ratings and thermal barriers.
+                            </p>
+                            <div class="space-y-3 mb-6">
+                                <div class="flex items-center justify-between text-xs p-2.5 bg-white/5 rounded-lg">
+                                    <span class="font-medium text-slate-300">PIR Core (Polyisocyanurate)</span>
+                                    <span class="text-brand-400 font-semibold">Best Thermal Efficiency</span>
+                                </div>
+                                <div class="flex items-center justify-between text-xs p-2.5 bg-white/5 rounded-lg">
+                                    <span class="font-medium text-slate-300">Mineral Wool Core</span>
+                                    <span class="text-orange-400 font-semibold">Ultimate Fire Resistance</span>
+                                </div>
+                            </div>
+                            <a href="#what-is" class="block text-center w-full py-3 text-sm font-semibold bg-white/10 hover:bg-white/15 text-white rounded-xl transition-all">
+                                Explore Core Comparison
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 1: ¿Qué es un panel sándwich? (Interactivo con vista explotada) -->
+        <section id="what-is" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-sm font-extrabold text-brand-600 uppercase tracking-widest">Educational Anatomy</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2">What is a Sandwich Panel?</h2>
+                    <p class="text-lg text-slate-600 mt-4">
+                        Essentially, it is a single modular unit comprising three solid components combined to create an unbreakable, high-performance structural barrier.
+                    </p>
+                </div>
+
+                <!-- Contenedor del interactivo de capas -->
+                <div class="grid lg:grid-cols-12 gap-12 items-center">
+                    <!-- Columna de control visual del modelo sándwich -->
+                    <div class="lg:col-span-6 flex flex-col items-center">
+                        <p class="text-xs text-slate-400 mb-6 uppercase tracking-widest font-bold">Interactive Exploded View (Click Layers)</p>
+                        
+                        <!-- Contenedor de las capas animadas -->
+                        <div class="relative w-full max-w-xs aspect-square flex flex-col justify-between items-center py-6 bg-slate-50 border border-slate-100 rounded-2xl shadow-inner">
+                            
+                            <!-- Capa Superior (Metal) -->
+                            <button onclick="selectLayer('top')" id="layer-top-btn" class="layer-transition w-10/12 bg-gradient-to-r from-slate-400 to-slate-500 text-white font-bold py-4 px-4 rounded-lg shadow-md hover:scale-105 focus:outline-none flex justify-between items-center transform translate-y-2 z-30">
+                                <span>1. External Protective Steel</span>
+                                <i data-lucide="shield-check" class="w-5 h-5"></i>
+                            </button>
+
+                            <!-- Línea de conexión visual -->
+                            <div class="h-10 w-0.5 border-dashed border-slate-300 border-l z-10"></div>
+
+                            <!-- Capa Media (Aislamiento) -->
+                            <button onclick="selectLayer('mid')" id="layer-mid-btn" class="layer-transition w-11/12 bg-gradient-to-r from-thermal-500 to-amber-500 text-white font-bold py-8 px-4 rounded-xl shadow-lg hover:scale-105 focus:outline-none flex justify-between items-center transform z-20">
+                                <span>2. High-Performance Insulating Core</span>
+                                <i data-lucide="flame-kindling" class="w-6 h-6"></i>
+                            </button>
+
+                            <!-- Línea de conexión visual -->
+                            <div class="h-10 w-0.5 border-dashed border-slate-300 border-l z-10"></div>
+
+                            <!-- Capa Inferior (Metal) -->
+                            <button onclick="selectLayer('bot')" id="layer-bot-btn" class="layer-transition w-10/12 bg-gradient-to-r from-slate-400 to-slate-500 text-white font-bold py-4 px-4 rounded-lg shadow-md hover:scale-105 focus:outline-none flex justify-between items-center transform -translate-y-2 z-30">
+                                <span>3. Internal Structural Steel</span>
+                                <i data-lucide="activity" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Columna de detalles informativos dinámicos -->
+                    <div class="lg:col-span-6 bg-slate-50 p-8 rounded-3xl border border-slate-100 shadow-md">
+                        <div id="layer-details-box">
+                            <span class="inline-block px-3 py-1 bg-brand-100 text-brand-800 text-xs font-bold rounded-full mb-4">Core Structural Element</span>
+                            <h3 id="layer-title" class="text-2xl font-bold text-slate-900 mb-3">High-Performance Insulating Core</h3>
+                            <p id="layer-desc" class="text-slate-600 leading-relaxed mb-6">
+                                This central foam layer is the actual barrier. Usually composed of PIR, PUR, or Stone Wool, it intercepts high and low temperatures, eliminating thermal bridges and drastically reducing building cooling or heating loads.
+                            </p>
+                            <div class="grid grid-cols-2 gap-4 border-t border-slate-200 pt-6">
+                                <div>
+                                    <p class="text-xs text-slate-400 font-semibold uppercase">Thermal Efficiency</p>
+                                    <p id="layer-stat1" class="text-lg font-bold text-slate-800">U-Value down to 0.11 W/m²K</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400 font-semibold uppercase">Key Feature</p>
+                                    <p id="layer-stat2" class="text-lg font-bold text-slate-800">Moisture Resistant Core</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: Beneficios del Aislamiento Térmico -->
+        <section id="benefits" class="py-20 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-sm font-extrabold text-thermal-600 uppercase tracking-widest">Why Thermal Insulation Matters</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2">The True Economics & Power of Insulation</h2>
+                    <p class="text-lg text-slate-600 mt-4">
+                        Investing in smart, high-grade insulation isn't just a construction requirement; it's a financial asset that pays continuous dividends in savings and safety.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Beneficio 1 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all">
+                        <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-600 mb-6">
+                            <i data-lucide="zap" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Instant Energy Savings</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Insulated sandwich panels reflect scorching heat in summer and secure heating in winter. Experience up to 40% reductions in utility bills immediately after installation.
+                        </p>
+                    </div>
+
+                    <!-- Beneficio 2 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all">
+                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 mb-6">
+                            <i data-lucide="cloud-rain" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Anti-Condensation Barrier</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Moisture inside walls is a structural hazard. Closed-cell panel designs prevent condensation, avoiding mold growth and safeguarding both family health and steel integrity.
+                        </p>
+                    </div>
+
+                    <!-- Beneficio 3 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all">
+                        <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center text-amber-600 mb-6">
+                            <i data-lucide="flame" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Fire Safety Standards</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Modern cores like Rockwool or advanced PIR deliver excellent flame-retardant values (Euroclass B-s1, d0), giving critical protection and structural life when emergencies strike.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: Calculador de Espesores (Herramienta de Captación Interactiva) -->
+        <section id="calculator" class="py-20 bg-white">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-brand-950 text-white rounded-3xl overflow-hidden shadow-xl">
+                    <div class="p-8 sm:p-12 lg:p-16">
+                        <div class="max-w-2xl">
+                            <span class="text-xs font-extrabold text-brand-400 uppercase tracking-widest">Interactive Calculator</span>
+                            <h2 class="text-3xl font-extrabold mt-2 mb-4">How to Choose the Correct Thickness?</h2>
+                            <p class="text-slate-300 text-sm sm:text-base">
+                                Choosing the correct core thickness avoids unnecessary upfront structural weight and eliminates energy inefficiencies down the road. Play around with our interactive selector below!
+                            </p>
+                        </div>
+
+                        <!-- Panel de control interactivo -->
+                        <div class="grid md:grid-cols-2 gap-10 mt-10 pt-10 border-t border-white/10">
+                            <div class="space-y-6">
+                                <!-- Selector de Tipo de Construcción -->
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-300 mb-2">1. Select Application / Project Type</label>
+                                    <div class="grid grid-cols-3 gap-2">
+                                        <button onclick="setBuildingType('cold')" id="btn-type-cold" class="px-3 py-3 rounded-xl border border-white/20 text-xs font-semibold hover:bg-white/5 transition-all focus:outline-none flex flex-col items-center gap-1 text-center bg-brand-600 border-brand-500">
+                                            <i data-lucide="thermometer-snowflake" class="w-5 h-5 text-brand-400"></i>
+                                            Cold Storage
+                                        </button>
+                                        <button onclick="setBuildingType('industrial')" id="btn-type-industrial" class="px-3 py-3 rounded-xl border border-white/20 text-xs font-semibold hover:bg-white/5 transition-all focus:outline-none flex flex-col items-center gap-1 text-center">
+                                            <i data-lucide="warehouse" class="w-5 h-5 text-slate-400"></i>
+                                            Industrial
+                                        </button>
+                                        <button onclick="setBuildingType('residential')" id="btn-type-residential" class="px-3 py-3 rounded-xl border border-white/20 text-xs font-semibold hover:bg-white/5 transition-all focus:outline-none flex flex-col items-center gap-1 text-center">
+                                            <i data-lucide="home" class="w-5 h-5 text-slate-400"></i>
+                                            Residential
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Selector de Clima -->
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-300 mb-2">2. Average Climatic Environment</label>
+                                    <div class="space-y-2">
+                                        <button onclick="setClimate('extreme')" id="btn-climate-extreme" class="w-full flex items-center justify-between p-3 rounded-xl border border-white/20 hover:bg-white/5 text-sm transition-all focus:outline-none bg-white/5 border-white">
+                                            <span class="flex items-center gap-2"><i data-lucide="wind" class="w-4 h-4 text-sky-400"></i> Extreme (Severe Winter / Deep Freeze)</span>
+                                            <i data-lucide="check-circle" class="w-4 h-4 text-brand-400" id="icon-climate-extreme"></i>
+                                        </button>
+                                        <button onclick="setClimate('moderate')" id="btn-climate-moderate" class="w-full flex items-center justify-between p-3 rounded-xl border border-white/20 hover:bg-white/5 text-sm transition-all focus:outline-none">
+                                            <span class="flex items-center gap-2"><i data-lucide="cloud-sun" class="w-4 h-4 text-amber-400"></i> Moderate Climate</span>
+                                            <i data-lucide="circle" class="w-4 h-4 text-slate-400" id="icon-climate-moderate"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Columna del Resultado Dinámico -->
+                            <div class="bg-white/5 rounded-2xl p-6 border border-white/10 flex flex-col justify-between">
+                                <div>
+                                    <span class="text-xs font-bold text-thermal-400 uppercase tracking-widest">Recommended Specification</span>
+                                    <h3 class="text-lg font-bold mt-1 text-white">Optimal Panel Dimensions</h3>
+                                </div>
+
+                                <div class="my-6 text-center">
+                                    <div class="inline-flex items-center justify-center p-6 bg-brand-600/20 rounded-full mb-3">
+                                        <span id="output-thickness" class="text-5xl font-extrabold text-brand-400">120</span>
+                                        <span class="text-2xl font-bold ml-1 text-brand-400">mm</span>
+                                    </div>
+                                    <p id="output-label" class="text-sm font-medium text-slate-300">Heavy-Duty Insulation Performance</p>
+                                </div>
+
+                                <div class="space-y-2.5">
+                                    <div class="flex items-center justify-between text-xs text-slate-400">
+                                        <span>Estimated Thermal Resistance (R):</span>
+                                        <span id="output-r" class="font-bold text-slate-200">R-45</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-xs text-slate-400">
+                                        <span>Target U-Value equivalent:</span>
+                                        <span id="output-u" class="font-bold text-slate-200">~ 0.16 W/m²K</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-xs text-slate-400">
+                                        <span>Primary Application Target:</span>
+                                        <span id="output-desc" class="font-bold text-slate-200">Industrial Warehousing</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: Tendencias Sostenibles -->
+        <section id="trends" class="py-20 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+                    <div class="max-w-2xl">
+                        <span class="text-sm font-extrabold text-brand-600 uppercase tracking-widest">Global Insights</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2">Sustainable Construction & Carbon Neutrality</h2>
+                        <p class="text-slate-600 mt-4 text-base sm:text-lg">
+                            The future of architecture is zero-carbon. Discover how sandwich panels are driving clean-tech energy standards across modern infrastructure.
+                        </p>
+                    </div>
+                    <div class="mt-4 md:mt-0">
+                        <span class="inline-flex items-center gap-1.5 px-4 py-2 bg-white rounded-full border border-slate-200 shadow-sm text-xs font-semibold text-slate-700">
+                            Updated for 2026 Trends <span class="h-2 w-2 rounded-full bg-red-500"></span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Tendencia 1 -->
+                    <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 flex flex-col md:flex-row gap-6 items-start">
+                        <div class="w-16 h-16 bg-brand-50 flex-shrink-0 rounded-2xl flex items-center justify-center text-brand-600">
+                            <i data-lucide="recycle" class="w-8 h-8"></i>
+                        </div>
+                        <div class="space-y-3">
+                            <h3 class="text-xl font-bold text-slate-900">100% Bio-attributed Cores</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">
+                                Chemical insulation components are quickly shifting from petrochemical resins to bio-based and circular materials. Today's PIR foam cores utilize recycled materials like consumer plastics and biological oils to reduce carbon foot printing.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Tendencia 2 -->
+                    <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 flex flex-col md:flex-row gap-6 items-start">
+                        <div class="w-16 h-16 bg-thermal-50 flex-shrink-0 rounded-2xl flex items-center justify-center text-thermal-600">
+                            <i data-lucide="sun" class="w-8 h-8"></i>
+                        </div>
+                        <div class="space-y-3">
+                            <h3 class="text-xl font-bold text-slate-900">Integrating Photovoltaic (BIPV) Systems</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">
+                                Symmetrical panel profiling now perfectly interfaces with thin-film solar laminates. This concept transforms basic structural insulation panels into power-generating, multi-functional envelopes.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5: CAPTACIÓN DE LEADS / DESCARGA DE GUÍA DE COMPRA -->
+        <section id="download-guide" class="py-20 bg-white relative overflow-hidden">
+            <!-- Patrón decorativo de fondo -->
+            <div class="absolute inset-0 opacity-[0.03] pointer-events-none">
+                <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="1"/>
+                        </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#grid)" />
+                </svg>
+            </div>
+
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                <div class="inline-flex items-center gap-2 p-1 px-3 bg-brand-50 border border-brand-100 rounded-full text-xs font-semibold text-brand-700 uppercase tracking-widest mb-6">
+                    <i data-lucide="book-open" class="w-4 h-4"></i> Free Downloadable Resource
+                </div>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-none mb-4">
+                    The Complete Sandwich Panel Buyer's Guide
+                </h2>
+                <p class="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+                    Download our authoritative, unbiased manual covering material properties, installation best practices, and pricing guides to make informed investment choices.
+                </p>
+
+                <!-- Formulario de descarga interactivo -->
+                <div class="max-w-md mx-auto bg-slate-50 p-6 sm:p-8 rounded-3xl border border-slate-100 shadow-xl">
+                    <form id="lead-form" onsubmit="handleLeadSubmit(event)" class="space-y-4">
+                        <div>
+                            <label for="lead-name" class="block text-left text-xs font-bold text-slate-500 uppercase mb-1.5">Your Name</label>
+                            <input type="text" id="lead-name" required placeholder="John Doe" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 text-sm bg-white transition-all">
+                        </div>
+                        <div>
+                            <label for="lead-email" class="block text-left text-xs font-bold text-slate-500 uppercase mb-1.5">Business Email</label>
+                            <input type="email" id="lead-email" required placeholder="john@example.com" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 text-sm bg-white transition-all">
+                        </div>
+                        <button type="submit" class="w-full py-3.5 px-6 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl transition-all shadow-md hover:shadow-lg shadow-brand-100 flex items-center justify-center gap-2">
+                            <span>Get My Free Buyer Guide (PDF)</span>
+                            <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                        </button>
+                    </form>
+
+                    <!-- Mensaje de éxito del formulario -->
+                    <div id="lead-success" class="hidden text-center py-6 space-y-3">
+                        <div class="inline-flex items-center justify-center p-3 bg-emerald-100 rounded-full text-emerald-600">
+                            <i data-lucide="check" class="w-8 h-8"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-900">Success!</h4>
+                        <p class="text-sm text-slate-600">
+                            We have sent the PDF download link directly to <span id="sent-email-span" class="font-semibold text-slate-800"></span>. Check your inbox shortly!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Acerca de -->
+                <div class="space-y-4 md:col-span-2">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center text-white">
+                            <i data-lucide="layers" class="w-5 h-5"></i>
+                        </div>
+                        <span class="text-lg font-extrabold tracking-tight text-white">
+                            panelforinsulation<span class="text-thermal-500">.com</span>
+                        </span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed max-w-sm">
+                        An educational platform dedicated to helping builders, architects, and buyers select optimized, sustainable, and reliable insulation panel technology.
+                    </p>
+                </div>
+
+                <!-- Enlaces del Dominio -->
+                <div class="space-y-3">
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider">Group Networks</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#" class="hover:text-white transition-colors">thermalsandwichpanels.co.m</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">eurosandwichpanels.com</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">thermalinsulationpanels.com</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal/Contacto -->
+                <div class="space-y-3">
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider">Resources</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#what-is" class="hover:text-white transition-colors">Core Comparison Chart</a></li>
+                        <li><a href="#calculator" class="hover:text-white transition-colors font-medium text-brand-400">Thickness Calculator Tool</a></li>
+                        <li><a href="#download-guide" class="hover:text-white transition-colors">Thermal Engineering Standards</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-600">
+                <p>&copy; 2026 panelforinsulation.com. All rights reserved. This site is strictly for informational purposes.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-slate-400 transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-slate-400 transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LÓGICA DE CONTROL DE LA INTERFAZ -->
+    <script>
+        // Inicializar iconos de Lucide
+        lucide.createIcons();
+
+        // Control del Menú Móvil
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Control de Capas de Anatomía Interactivas (What is a sandwich panel)
+        const layersData = {
+            top: {
+                title: 'External Protective Steel',
+                badge: 'Outer Shielding',
+                desc: 'A tough, profile-designed steel envelope featuring premium anti-corrosion lacquers. This layer protects the entire building from mechanical forces, wind loads, intense rainfall, and constant ultraviolet degradation.',
+                stat1: 'Galvanized Thickness: ~ 0.5 mm',
+                stat2: 'Standard Finish: Polyester & PVDF Coatings'
+            },
+            mid: {
+                title: 'High-Performance Insulating Core',
+                badge: 'Core Insulation Element',
+                desc: 'This central foam layer is the actual barrier. Usually composed of PIR, PUR, or Stone Wool, it intercepts high and low temperatures, eliminating thermal bridges and drastically reducing building cooling or heating loads.',
+                stat1: 'U-Value down to 0.11 W/m²K',
+                stat2: 'Moisture Resistant Core'
+            },
+            bot: {
+                title: 'Internal Structural Steel',
+                badge: 'Interior Architectural Support',
+                desc: 'Constructed from lightweight, high-tensile steel sheets designed to anchor the interior structure securely. Smooth or lightly micro-profiled configurations facilitate clean sanitization environments and support lightweight ceiling loads easily.',
+                stat1: 'High Load Capacity',
+                stat2: 'Washable Hygiene Profiles'
+            }
+        };
+
+        function selectLayer(layerKey) {
+            // Reiniciar todos los botones de capas a estado original
+            ['top', 'mid', 'bot'].forEach(key => {
+                const btn = document.getElementById(`layer-${key}-btn`);
+                btn.className = btn.className.replace(' scale-105 border-2 border-brand-500 shadow-xl', '');
+            });
+
+            // Destacar la capa seleccionada
+            const activeBtn = document.getElementById(`layer-${layerKey}-btn`);
+            activeBtn.className += ' scale-105 border-2 border-brand-500 shadow-xl';
+
+            // Actualizar datos del panel informativo
+            const data = layersData[layerKey];
+            const detailsBox = document.getElementById('layer-details-box');
+
+            // Efecto fade-in rápido para actualización de datos
+            detailsBox.style.opacity = 0.3;
+            setTimeout(() => {
+                document.getElementById('layer-title').innerText = data.title;
+                document.getElementById('layer-desc').innerText = data.desc;
+                document.getElementById('layer-stat1').innerText = data.stat1;
+                document.getElementById('layer-stat2').innerText = data.stat2;
+                detailsBox.querySelector('span').innerText = data.badge;
+                detailsBox.style.opacity = 1;
+            }, 150);
+        }
+
+        // Control de la Calculadora de Espesores
+        let buildingType = 'cold'; // 'cold' | 'industrial' | 'residential'
+        let climateType = 'extreme'; // 'extreme' | 'moderate'
+
+        function setBuildingType(type) {
+            buildingType = type;
+            ['cold', 'industrial', 'residential'].forEach(t => {
+                const btn = document.getElementById(`btn-type-${t}`);
+                if (t === type) {
+                    btn.classList.add('bg-brand-600', 'border-brand-500');
+                    btn.querySelector('i').className = btn.querySelector('i').className.replace('text-slate-400', 'text-brand-400');
+                } else {
+                    btn.classList.remove('bg-brand-600', 'border-brand-500');
+                    btn.querySelector('i').className = btn.querySelector('i').className.replace('text-brand-400', 'text-slate-400');
+                }
+            });
+            calculateThickness();
+        }
+
+        function setClimate(climate) {
+            climateType = climate;
+            ['extreme', 'moderate'].forEach(c => {
+                const btn = document.getElementById(`btn-climate-${c}`);
+                const icon = document.getElementById(`icon-climate-${c}`);
+                if (c === climate) {
+                    btn.classList.add('bg-white/5', 'border-white');
+                    icon.setAttribute('data-lucide', 'check-circle');
+                    icon.classList.replace('text-slate-400', 'text-brand-400');
+                } else {
+                    btn.classList.remove('bg-white/5', 'border-white');
+                    icon.setAttribute('data-lucide', 'circle');
+                    icon.classList.replace('text-brand-400', 'text-slate-400');
+                }
+            });
+            lucide.createIcons();
+            calculateThickness();
+        }
+
+        function calculateThickness() {
+            let thickness = 80;
+            let label = "Standard Thermal Barrier";
+            let rValue = "R-30";
+            let uValue = "~ 0.22 W/m²K";
+            let desc = "Standard Warehouse Storage";
+
+            if (buildingType === 'cold') {
+                if (climateType === 'extreme') {
+                    thickness = 180;
+                    label = "Heavy Arctic Freeze / Deep Cold";
+                    rValue = "R-68";
+                    uValue = "~ 0.09 W/m²K";
+                    desc = "Industrial Deep Freeze Facilities";
+                } else {
+                    thickness = 120;
+                    label = "Standard Cold Storage Chamber";
+                    rValue = "R-45";
+                    uValue = "~ 0.16 W/m²K";
+                    desc = "Fruit & Dairy Logistics Storage";
+                }
+            } else if (buildingType === 'industrial') {
+                if (climateType === 'extreme') {
+                    thickness = 100;
+                    label = "Enhanced Temperature Stability";
+                    rValue = "R-38";
+                    uValue = "~ 0.19 W/m²K";
+                    desc = "Northern Climate Warehousing";
+                } else {
+                    thickness = 60;
+                    label = "Basic Climatic Boundary";
+                    rValue = "R-22";
+                    uValue = "~ 0.31 W/m²K";
+                    desc = "Moderate Zone Production Plant";
+                }
+            } else if (buildingType === 'residential') {
+                if (climateType === 'extreme') {
+                    thickness = 120;
+                    label = "High Energy Efficiency House (Passive)";
+                    rValue = "R-45";
+                    uValue = "~ 0.16 W/m²K";
+                    desc = "Cold-Climate Residential Framing";
+                } else {
+                    thickness = 80;
+                    label = "Standard Residential Shell";
+                    rValue = "R-30";
+                    uValue = "~ 0.22 W/m²K";
+                    desc = "Eco-Friendly Suburban Housing";
+                }
+            }
+
+            document.getElementById('output-thickness').innerText = thickness;
+            document.getElementById('output-label').innerText = label;
+            document.getElementById('output-r').innerText = rValue;
+            document.getElementById('output-u').innerText = uValue;
+            document.getElementById('output-desc').innerText = desc;
+        }
+
+        // Gestión del Formulario de Leads
+        function handleLeadSubmit(event) {
+            event.preventDefault();
+            const email = document.getElementById('lead-email').value;
+            
+            // Simular carga de envío de formulario de forma elegante
+            const form = document.getElementById('lead-form');
+            form.classList.add('opacity-50', 'pointer-events-none');
+            
+            setTimeout(() => {
+                form.classList.add('hidden');
+                const successDiv = document.getElementById('lead-success');
+                successDiv.classList.remove('hidden');
+                document.getElementById('sent-email-span').innerText = email;
+            }, 1000);
+        }
+
+        // Ejecutar cálculo inicial al cargar
+        calculateThickness();
+        // Marcar la capa del núcleo por defecto al inicio
+        selectLayer('mid');
+    </script>
+</body>
+</html>

@@ -3,6 +3,7 @@ import NavLinks from "../ui/NavLinks.astro";
 import MobileMenu from "./MobileMenu.astro";
 import type { TranslationKeys } from "../../i18n/en";
 import type { Lang } from "../../i18n/utils";
+import { getAlternatePath } from "../../i18n/utils";
 import { Layers } from "lucide-astro";
 
 interface Props {
@@ -15,7 +16,8 @@ const { t, lang } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const prefix = lang === "es" ? `${base}es/` : base;
 const alternateLang = lang === "en" ? "es" : "en";
-const alternatePath = lang === "en" ? `${base}es/` : base;
+// const alternatePath = lang === "en" ? `${base}es/` : base;
+const alternatePath = getAlternatePath(Astro.url, base);
 ---
 
 <header class="navbar">

@@ -5,6 +5,7 @@ export const en = {
     calculator: "Thickness Tool",
     trends: "Sustainability Trends",
     cta: "Free Buyer's Guide",
+    blog: "Blog",
   },
   hero: {
     badge: "Smart Construction Portal",

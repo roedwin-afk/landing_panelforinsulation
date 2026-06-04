@@ -1,0 +1,257 @@
+---
+import { Zap, CloudRain, Flame } from "lucide-astro";
+import type { TranslationKeys } from "../../i18n/en";
+
+interface Props {
+  t: TranslationKeys;
+}
+
+const { t } = Astro.props;
+
+const items = [
+  {
+    icon: "zap",
+    color: "emerald",
+    title: t.benefits.items[0].title,
+    desc: t.benefits.items[0].desc,
+  },
+  {
+    icon: "rain",
+    color: "blue",
+    title: t.benefits.items[1].title,
+    desc: t.benefits.items[1].desc,
+  },
+  {
+    icon: "flame",
+    color: "amber",
+    title: t.benefits.items[2].title,
+    desc: t.benefits.items[2].desc,
+  },
+];
+---
+
+<section id="benefits" class="benefits">
+  <div class="container">
+
+    <!-- Header -->
+    <div class="benefits__header reveal">
+      <span class="benefits__badge">{t.benefits.badge}</span>
+      <h2 class="benefits__title">{t.benefits.title}</h2>
+      <p class="benefits__desc">{t.benefits.description}</p>
+    </div>
+
+    <!-- Grid -->
+    <div class="benefits__grid">
+
+      <!-- Featured item (first) -->
+      <div class="benefits__item benefits__item--featured reveal" data-delay="0">
+        <div class="benefits__item-icon benefits__item-icon--emerald">
+          <Zap size={28} />
+        </div>
+        <div class="benefits__item-number">01</div>
+        <h3 class="benefits__item-title">{items[0].title}</h3>
+        <p class="benefits__item-desc">{items[0].desc}</p>
+        <div class="benefits__item-pill">
+          <span>Up to 40% savings</span>
+        </div>
+      </div>
+
+      <!-- Right column: two stacked items -->
+      <div class="benefits__col">
+        <div class="benefits__item reveal" data-delay="100">
+          <div class="benefits__item-icon benefits__item-icon--blue">
+            <CloudRain size={22} />
+          </div>
+          <div class="benefits__item-number">02</div>
+          <h3 class="benefits__item-title">{items[1].title}</h3>
+          <p class="benefits__item-desc">{items[1].desc}</p>
+        </div>
+
+        <div class="benefits__item reveal" data-delay="200">
+          <div class="benefits__item-icon benefits__item-icon--amber">
+            <Flame size={22} />
+          </div>
+          <div class="benefits__item-number">03</div>
+          <h3 class="benefits__item-title">{items[2].title}</h3>
+          <p class="benefits__item-desc">{items[2].desc}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .benefits {
+    padding-block: var(--space-20);
+    background: var(--color-slate-50);
+  }
+
+  /* ── Header ── */
+  .benefits__header {
+    text-align: center;
+    max-width: 42rem;
+    margin-inline: auto;
+    margin-bottom: var(--space-16);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .benefits__badge {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-thermal-600);
+  }
+
+  .benefits__title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    color: var(--color-slate-900);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .benefits__desc {
+    font-size: 1rem;
+    color: var(--color-slate-600);
+    line-height: 1.7;
+  }
+
+  /* ── Grid ── */
+  .benefits__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .benefits__grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+    }
+  }
+
+  /* ── Right column ── */
+  .benefits__col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  /* ── Item base ── */
+  .benefits__item {
+    position: relative;
+    background: white;
+    border: 1px solid var(--color-slate-100);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+    overflow: hidden;
+  }
+
+  .benefits__item:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+
+  /* Featured item stretches full height */
+  .benefits__item--featured {
+    justify-content: flex-end;
+    min-height: 360px;
+    background: linear-gradient(
+      160deg,
+      var(--color-slate-900) 0%,
+      #0a2218 100%
+    );
+    border-color: transparent;
+  }
+
+  .benefits__item--featured .benefits__item-title {
+    color: white;
+    font-size: 1.5rem;
+  }
+
+  .benefits__item--featured .benefits__item-desc {
+    color: var(--color-slate-300);
+  }
+
+  .benefits__item--featured .benefits__item-number {
+    color: rgb(255 255 255 / 0.1);
+  }
+
+  /* ── Item number ── */
+  .benefits__item-number {
+    position: absolute;
+    top: var(--space-6);
+    right: var(--space-6);
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--color-slate-100);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    user-select: none;
+  }
+
+  /* ── Icon ── */
+  .benefits__item-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-2);
+    flex-shrink: 0;
+  }
+
+  .benefits__item-icon--emerald {
+    background: var(--color-emerald-100);
+    color: var(--color-emerald-600);
+  }
+
+  .benefits__item-icon--blue {
+    background: var(--color-blue-100);
+    color: var(--color-blue-600);
+  }
+
+  .benefits__item-icon--amber {
+    background: var(--color-amber-100);
+    color: var(--color-amber-600);
+  }
+
+  /* ── Text ── */
+  .benefits__item-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-slate-900);
+    line-height: 1.3;
+  }
+
+  .benefits__item-desc {
+    font-size: 0.875rem;
+    color: var(--color-slate-600);
+    line-height: 1.75;
+  }
+
+  /* ── Pill (featured only) ── */
+  .benefits__item-pill {
+    display: inline-flex;
+    width: fit-content;
+    margin-top: var(--space-2);
+    padding: var(--space-1) var(--space-3);
+    background: rgb(74 222 128 / 0.15);
+    border: 1px solid rgb(74 222 128 / 0.25);
+    border-radius: var(--radius-full);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--color-brand-400);
+    letter-spacing: 0.04em;
+  }
+</style>

@@ -1,0 +1,482 @@
+---
+import { Thermometer, Warehouse, Home, Wind, CloudSun } from "lucide-astro";
+import type { TranslationKeys } from "../../i18n/en";
+
+interface Props {
+    t: TranslationKeys;
+}
+
+const { t } = Astro.props;
+---
+
+<section id="calculator" class="calc">
+    <div class="container">
+        <div class="calc__wrapper reveal">
+            <!-- Right: result -->
+            <div class="calc__result">
+                <span class="calc__result-badge"
+                    >{t.calculator.result.badge}</span
+                >
+                <p class="calc__result-title">{t.calculator.result.title}</p>
+
+                <!-- Thickness display -->
+                <div class="calc__thickness-wrap">
+                    <div class="calc__thickness-ring">
+                        <span class="calc__thickness-value" id="calc-thickness"
+                            >120</span
+                        >
+                        <span class="calc__thickness-unit">mm</span>
+                    </div>
+                    <p class="calc__thickness-label" id="calc-label">
+                        Standard Cold Storage Chamber
+                    </p>
+                </div>
+
+                <!-- Stats -->
+                <div class="calc__stats">
+                    <div class="calc__stat">
+                        <span class="calc__stat-key"
+                            >{t.calculator.result.labelR}</span
+                        >
+                        <span class="calc__stat-val" id="calc-r">R-45</span>
+                    </div>
+                    <div class="calc__stat">
+                        <span class="calc__stat-key"
+                            >{t.calculator.result.labelU}</span
+                        >
+                        <span class="calc__stat-val" id="calc-u"
+                            >~ 0.16 W/m²K</span
+                        >
+                    </div>
+                    <div class="calc__stat">
+                        <span class="calc__stat-key"
+                            >{t.calculator.result.labelDesc}</span
+                        >
+                        <span class="calc__stat-val" id="calc-desc"
+                            >Fruit & Dairy Logistics</span
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <!-- Left: controls -->
+            <div class="calc__controls">
+                <span class="calc__badge">{t.calculator.badge}</span>
+                <h2 class="calc__title">{t.calculator.title}</h2>
+                <p class="calc__desc">{t.calculator.description}</p>
+
+                <!-- Building type -->
+                <div class="calc__group">
+                    <label class="calc__label">{t.calculator.labelType}</label>
+                    <div class="calc__type-grid">
+                        <button
+                            class="calc__type-btn is-active"
+                            data-type="cold"
+                        >
+                            <Thermometer size={20} />
+                            <span>{t.calculator.types.cold}</span>
+                        </button>
+                        <button class="calc__type-btn" data-type="industrial">
+                            <Warehouse size={20} />
+                            <span>{t.calculator.types.industrial}</span>
+                        </button>
+                        <button class="calc__type-btn" data-type="residential">
+                            <Home size={20} />
+                            <span>{t.calculator.types.residential}</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Climate -->
+                <div class="calc__group">
+                    <label class="calc__label"
+                        >{t.calculator.labelClimate}</label
+                    >
+                    <div class="calc__climate-grid">
+                        <button
+                            class="calc__climate-btn is-active"
+                            data-climate="extreme"
+                        >
+                            <Wind size={16} />
+                            <span>{t.calculator.climates.extreme}</span>
+                        </button>
+                        <button
+                            class="calc__climate-btn"
+                            data-climate="moderate"
+                        >
+                            <CloudSun size={16} />
+                            <span>{t.calculator.climates.moderate}</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .calc {
+        padding-block: var(--space-20);
+        background: white;
+    }
+
+    /* ── Wrapper: two columns ── */
+    .calc__wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        border-radius: var(--radius-2xl);
+        overflow: hidden;
+        box-shadow: var(--shadow-xl);
+    }
+
+    @media (min-width: 768px) {
+        .calc__wrapper {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    /* ── Left: controls ── */
+    .calc__controls {
+        background: linear-gradient(
+            160deg,
+            var(--color-slate-900),
+            var(--color-slate-950)
+        );
+        padding: var(--space-10) var(--space-8);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-6);
+        color: white;
+    }
+
+    .calc__badge {
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--color-brand-400);
+    }
+
+    .calc__title {
+        font-size: clamp(1.4rem, 3vw, 2rem);
+        font-weight: 800;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+    }
+
+    .calc__desc {
+        font-size: 0.85rem;
+        color: var(--color-slate-400);
+        line-height: 1.7;
+    }
+
+    /* ── Groups ── */
+    .calc__group {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
+    }
+
+    .calc__label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--color-slate-300);
+    }
+
+    /* ── Type buttons ── */
+    .calc__type-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-2);
+    }
+
+    .calc__type-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-2);
+        padding: var(--space-3) var(--space-2);
+        border: 1px solid rgb(255 255 255 / 0.1);
+        border-radius: var(--radius-md);
+        background: transparent;
+        color: var(--color-slate-400);
+        font-size: 0.72rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-family: inherit;
+    }
+
+    .calc__type-btn:hover {
+        background: rgb(255 255 255 / 0.05);
+        color: white;
+    }
+
+    .calc__type-btn.is-active {
+        background: var(--color-brand-600);
+        border-color: var(--color-brand-500);
+        color: white;
+        box-shadow: 0 0 0 3px rgb(22 163 74 / 0.2);
+    }
+
+    /* ── Climate buttons ── */
+    .calc__climate-grid {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+    }
+
+    .calc__climate-btn {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        padding: var(--space-3) var(--space-4);
+        border: 1px solid rgb(255 255 255 / 0.1);
+        border-radius: var(--radius-md);
+        background: transparent;
+        color: var(--color-slate-400);
+        font-size: 0.8rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-family: inherit;
+        text-align: left;
+    }
+
+    .calc__climate-btn:hover {
+        background: rgb(255 255 255 / 0.05);
+        color: white;
+    }
+
+    .calc__climate-btn.is-active {
+        background: rgb(255 255 255 / 0.07);
+        border-color: white;
+        color: white;
+    }
+
+    /* ── Right: result ── */
+    .calc__result {
+        background: var(--color-slate-50);
+        padding: var(--space-10) var(--space-8);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-6);
+        justify-content: center;
+    }
+
+    .calc__result-badge {
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--color-thermal-600);
+    }
+
+    .calc__result-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--color-slate-700);
+        margin-top: -var(--space-3);
+    }
+
+    /* ── Thickness ring ── */
+    .calc__thickness-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-3);
+        padding-block: var(--space-4);
+    }
+
+    .calc__thickness-ring {
+        width: 10rem;
+        height: 10rem;
+        border-radius: 50%;
+        border: 6px solid var(--color-brand-100);
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        box-shadow:
+            0 0 0 12px var(--color-brand-50),
+            var(--shadow-md);
+        position: relative;
+    }
+
+    .calc__thickness-value {
+        font-size: 3rem;
+        font-weight: 800;
+        color: var(--color-brand-600);
+        letter-spacing: -0.04em;
+        line-height: 1;
+        transition: all 0.3s ease;
+    }
+
+    .calc__thickness-unit {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--color-brand-400);
+        align-self: flex-end;
+        padding-bottom: 6px;
+    }
+
+    .calc__thickness-label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--color-slate-500);
+        text-align: center;
+        max-width: 16rem;
+        line-height: 1.4;
+        transition: all 0.3s ease;
+    }
+
+    /* ── Stats ── */
+    .calc__stats {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
+        border-top: 1px solid var(--color-slate-200);
+        padding-top: var(--space-4);
+    }
+
+    .calc__stat {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-4);
+    }
+
+    .calc__stat-key {
+        font-size: 0.75rem;
+        color: var(--color-slate-400);
+        line-height: 1.4;
+    }
+
+    .calc__stat-val {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--color-slate-700);
+        white-space: nowrap;
+        transition: all 0.3s ease;
+    }
+</style>
+
+<script>
+    type BuildingType = "cold" | "industrial" | "residential";
+    type ClimateType = "extreme" | "moderate";
+
+    interface CalcResult {
+        thickness: number;
+        label: string;
+        r: string;
+        u: string;
+        desc: string;
+    }
+
+    const data: Record<BuildingType, Record<ClimateType, CalcResult>> = {
+        cold: {
+            extreme: {
+                thickness: 180,
+                label: "Heavy Arctic Freeze / Deep Cold",
+                r: "R-68",
+                u: "~ 0.09 W/m²K",
+                desc: "Industrial Deep Freeze Facilities",
+            },
+            moderate: {
+                thickness: 120,
+                label: "Standard Cold Storage Chamber",
+                r: "R-45",
+                u: "~ 0.16 W/m²K",
+                desc: "Fruit & Dairy Logistics",
+            },
+        },
+        industrial: {
+            extreme: {
+                thickness: 100,
+                label: "Enhanced Temperature Stability",
+                r: "R-38",
+                u: "~ 0.19 W/m²K",
+                desc: "Northern Climate Warehousing",
+            },
+            moderate: {
+                thickness: 60,
+                label: "Basic Climatic Boundary",
+                r: "R-22",
+                u: "~ 0.31 W/m²K",
+                desc: "Moderate Zone Production Plant",
+            },
+        },
+        residential: {
+            extreme: {
+                thickness: 120,
+                label: "High Energy Efficiency (Passive)",
+                r: "R-45",
+                u: "~ 0.16 W/m²K",
+                desc: "Cold-Climate Residential Framing",
+            },
+            moderate: {
+                thickness: 80,
+                label: "Standard Residential Shell",
+                r: "R-30",
+                u: "~ 0.22 W/m²K",
+                desc: "Eco-Friendly Suburban Housing",
+            },
+        },
+    };
+
+    function initCalculator() {
+        let buildingType: BuildingType = "cold";
+        let climateType: ClimateType = "extreme";
+
+        const thicknessEl = document.getElementById("calc-thickness");
+        const labelEl = document.getElementById("calc-label");
+        const rEl = document.getElementById("calc-r");
+        const uEl = document.getElementById("calc-u");
+        const descEl = document.getElementById("calc-desc");
+
+        if (!thicknessEl) return;
+
+        function update() {
+            const result = data[buildingType][climateType];
+            thicknessEl!.textContent = String(result.thickness);
+            labelEl!.textContent = result.label;
+            rEl!.textContent = result.r;
+            uEl!.textContent = result.u;
+            descEl!.textContent = result.desc;
+        }
+
+        // Type buttons
+        document
+            .querySelectorAll<HTMLButtonElement>(".calc__type-btn")
+            .forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    document
+                        .querySelectorAll(".calc__type-btn")
+                        .forEach((b) => b.classList.remove("is-active"));
+                    btn.classList.add("is-active");
+                    buildingType = btn.dataset.type as BuildingType;
+                    update();
+                });
+            });
+
+        // Climate buttons
+        document
+            .querySelectorAll<HTMLButtonElement>(".calc__climate-btn")
+            .forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    document
+                        .querySelectorAll(".calc__climate-btn")
+                        .forEach((b) => b.classList.remove("is-active"));
+                    btn.classList.add("is-active");
+                    climateType = btn.dataset.climate as ClimateType;
+                    update();
+                });
+            });
+
+        update();
+    }
+
+    initCalculator();
+    document.addEventListener("astro:page-load", initCalculator);
+</script>

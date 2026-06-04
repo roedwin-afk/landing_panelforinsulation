@@ -7,6 +7,7 @@ export const es: TranslationKeys = {
     calculator: "Herramienta de Grosor",
     trends: "Tendencias de Sostenibilidad",
     cta: "Guía Gratuita",
+    blog: "Blog",
   },
   hero: {
     badge: "Portal de Construcción Inteligente",
