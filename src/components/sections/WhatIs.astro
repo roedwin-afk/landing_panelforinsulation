@@ -1,5 +1,4 @@
 ---
-import { ShieldCheck, Flame, Activity } from "lucide-astro";
 import type { TranslationKeys } from "../../i18n/en";
 import type { Lang } from "../../i18n/utils";
 
@@ -8,12 +7,11 @@ interface Props {
   lang: Lang;
 }
 
-const { t } = Astro.props;
+const { t, lang } = Astro.props;
 
 const layers = [
   {
     key: "top",
-    icon: "shield",
     color: "slate",
     label: t.whatIs.layers.top.title,
     badge: t.whatIs.layers.top.badge,
@@ -23,7 +21,6 @@ const layers = [
   },
   {
     key: "mid",
-    icon: "flame",
     color: "thermal",
     label: t.whatIs.layers.mid.title,
     badge: t.whatIs.layers.mid.badge,
@@ -33,7 +30,6 @@ const layers = [
   },
   {
     key: "bot",
-    icon: "activity",
     color: "brand",
     label: t.whatIs.layers.bot.title,
     badge: t.whatIs.layers.bot.badge,
@@ -42,6 +38,9 @@ const layers = [
     stat2: t.whatIs.layers.bot.stat2,
   },
 ];
+
+const ctaLabel = lang === "es" ? "Haz clic para explorar" : "Click to explore";
+const closeLabel = lang === "es" ? "Cerrar" : "Close";
 ---
 
 <section id="what-is" class="whatis">
@@ -57,51 +56,52 @@ const layers = [
     <!-- Interactive panel -->
     <div class="whatis__panel reveal" data-delay="120">
 
-      <!-- Visual: sandwich stack -->
-      <div class="whatis__stack">
-        <p class="whatis__stack-hint">{t.whatIs.interactiveHint}</p>
+      <!-- Stack (left) -->
+      <div class="whatis__stack" id="whatisStack">
 
-        <div class="whatis__layers">
-          <!-- Top steel -->
-          <button
-            class="whatis__layer whatis__layer--steel"
-            data-layer="0"
-            aria-pressed="false"
-          >
-            <ShieldCheck size={18} />
-            <span>{t.whatIs.layers.top.title}</span>
+        <!-- Close button -->
+        <button class="stack__close-btn" id="stackCloseBtn" aria-label={closeLabel}>
+          <span>×</span>
+        </button>
+
+        <!-- Wrapper -->
+        <div class="stack__wrapper" id="stackWrapper">
+
+          <!-- Top metal (closed + clickeable when open) -->
+          <button class="stack__metal stack__metal--top" id="stackTop" data-layer="0" aria-pressed="false" disabled>
+            <span class="stack__metal-label">{t.whatIs.layers.top.title}</span>
           </button>
 
-          <!-- Core -->
-          <button
-            class="whatis__layer whatis__layer--core"
-            data-layer="1"
-            aria-pressed="true"
-          >
-            <Flame size={20} />
-            <span>{t.whatIs.layers.mid.title}</span>
+          <!-- Core (visible only when open) -->
+          <button class="stack__core" id="stackCore" data-layer="1" aria-pressed="false" disabled>
+            <span class="stack__core-label">{t.whatIs.layers.mid.title}</span>
           </button>
 
-          <!-- Bottom steel -->
-          <button
-            class="whatis__layer whatis__layer--steel"
-            data-layer="2"
-            aria-pressed="false"
-          >
-            <Activity size={18} />
-            <span>{t.whatIs.layers.bot.title}</span>
+          <!-- Bottom metal (closed + clickeable when open) -->
+          <button class="stack__metal stack__metal--bot" id="stackBot" data-layer="2" aria-pressed="false" disabled>
+            <span class="stack__metal-label">{t.whatIs.layers.bot.title}</span>
           </button>
+
+          <!-- CTA overlay (visible when closed) -->
+          <div class="stack__cta-overlay" id="stackCtaOverlay">
+            <button class="stack__cta" id="stackOpenBtn" aria-label={ctaLabel}>
+              <span class="stack__cta-dot"></span>
+              <span class="stack__cta-text">{ctaLabel}</span>
+            </button>
+          </div>
+
         </div>
 
-        <!-- Cross section label -->
-        <div class="whatis__cross-label">
+        <!-- Cross label -->
+        <div class="whatis__cross-label" id="stackCrossLabel">
           <span class="whatis__cross-line"></span>
           <span class="whatis__cross-text">Cross Section View</span>
           <span class="whatis__cross-line"></span>
         </div>
+
       </div>
 
-      <!-- Detail panel -->
+      <!-- Detail panel (right) -->
       <div class="whatis__detail">
         {layers.map((layer, i) => (
           <div
@@ -171,7 +171,7 @@ const layers = [
     line-height: 1.7;
   }
 
-  /* ── Panel: two columns ── */
+  /* ── Panel ── */
   .whatis__panel {
     display: grid;
     grid-template-columns: 1fr;
@@ -186,79 +186,259 @@ const layers = [
     }
   }
 
-  /* ── Stack (left) ── */
+  /* ── Stack ── */
   .whatis__stack {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
   }
 
-  .whatis__stack-hint {
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-weight: 700;
-    color: var(--color-slate-400);
-    text-align: center;
-  }
-
-  .whatis__layers {
+  /* ── Wrapper ── */
+  .stack__wrapper {
+    position: relative;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 0;
     border-radius: var(--radius-xl);
-    overflow: hidden;
+    overflow: visible;
     box-shadow: var(--shadow-xl);
   }
 
-  /* Steel layers */
-  .whatis__layer {
+  /* ── Metal halves ── */
+  .stack__metal {
+    width: 100%;
+    border: none;
+    font-family: inherit;
+    cursor: default;
     display: flex;
     align-items: center;
-    gap: var(--space-3);
-    padding: var(--space-4) var(--space-6);
-    font-size: 0.85rem;
-    font-weight: 600;
+    justify-content: flex-start;
+    padding: var(--space-5) var(--space-6);
+    background:
+      repeating-linear-gradient(
+        90deg,
+        rgb(255 255 255 / 0.03) 0px,
+        rgb(255 255 255 / 0.03) 1px,
+        transparent 1px,
+        transparent 40px
+      ),
+      linear-gradient(160deg, #64748b 0%, #475569 40%, #334155 70%, #475569 100%);
+    transition: transform 0.55s cubic-bezier(0.77, 0, 0.18, 1),
+                padding-inline-start 0.25s ease,
+                filter 0.25s ease;
+    position: relative;
+    z-index: 2;
+  }
+
+  .stack__metal--top {
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    border-bottom: 1px solid rgb(255 255 255 / 0.06);
+  }
+
+  .stack__metal--bot {
+    border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+    border-top: 1px solid rgb(0 0 0 / 0.15);
+  }
+
+   /* Fly apart when open */
+  .stack__wrapper.is-open .stack__metal--top {
+    transform: translateY(-100%);
+  }
+
+  .stack__wrapper.is-open .stack__metal--bot {
+    transform: translateY(100%);
+  }
+
+  /* Clickeable when open */
+  .stack__metal.is-clickable {
     cursor: pointer;
-    transition: all 0.25s ease;
-    border: none;
-    text-align: left;
+  }
+
+  .stack__metal.is-clickable:hover {
+    filter: brightness(1.15);
+    padding-inline-start: var(--space-8);
+  }
+
+  .stack__metal.is-active {
+    filter: brightness(1.25);
+    padding-inline-start: var(--space-8);
+    box-shadow: inset 3px 0 0 var(--color-brand-400);
+  }
+
+  /* ── Metal label ── */
+  .stack__metal-label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: white;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.3s ease 0.4s, transform 0.3s ease 0.4s;
+    pointer-events: none;
+  }
+
+  .stack__wrapper.is-open .stack__metal-label {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* ── Core ── */
+  .stack__core {
     width: 100%;
+    border: none;
+    font-family: inherit;
+    cursor: default;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 var(--space-6);
+    background: linear-gradient(135deg, var(--color-thermal-500), #f59e0b);
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    position: relative;
+    z-index: 1;
+    transition: max-height 0.4s ease 0.25s,
+                opacity 0.3s ease 0.3s,
+                padding-block 0.4s ease 0.25s,
+                padding-inline-start 0.25s ease,
+                filter 0.25s ease;
+  }
+
+  .stack__wrapper.is-open .stack__core {
+    max-height: 80px;
+    opacity: 1;
+    padding-block: var(--space-8);
+  }
+
+  .stack__core.is-clickable {
+    cursor: pointer;
+  }
+
+  .stack__core.is-clickable:hover {
+    filter: brightness(1.1);
+    padding-inline-start: var(--space-8);
+  }
+
+  .stack__core.is-active {
+    filter: brightness(1.15);
+    padding-inline-start: var(--space-8);
+    box-shadow: inset 3px 0 0 rgb(255 255 255 / 0.5);
+  }
+
+  /* ── Core label ── */
+  .stack__core-label {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: white;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.3s ease 0.5s, transform 0.3s ease 0.5s;
+    pointer-events: none;
+  }
+
+  .stack__wrapper.is-open .stack__core-label {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* ── CTA overlay ── */
+  .stack__cta-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    transition: opacity 0.3s ease;
+    pointer-events: all;
+  }
+
+  .stack__wrapper.is-open .stack__cta-overlay {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .stack__cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    background: transparent;
+    border: none;
+    cursor: pointer;
     font-family: inherit;
   }
 
-  .whatis__layer--steel {
-    background: linear-gradient(135deg, #64748b, #475569);
+  .stack__cta-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--color-brand-400);
+    animation: pulse-dot 2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  .stack__cta-text {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
     color: white;
-    padding-block: var(--space-5);
+    text-shadow: 0 1px 4px rgb(0 0 0 / 0.4);
   }
 
-  .whatis__layer--steel[aria-pressed="true"],
-  .whatis__layer--steel:hover {
-    background: linear-gradient(135deg, #334155, #1e293b);
-    padding-inline-start: var(--space-8);
-  }
-
-  /* Core layer */
-  .whatis__layer--core {
-    background: linear-gradient(135deg, var(--color-thermal-500), #f59e0b);
+  /* ── Close button ── */
+  .stack__close-btn {
+    position: absolute;
+    top: -0.75rem;
+    right: -0.75rem;
+    z-index: 10;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--color-slate-900);
+    border: 2px solid var(--color-slate-700);
     color: white;
-    padding-block: var(--space-8);
-    font-size: 0.9rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-family: inherit;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.2s ease, background 0.2s;
+    transform: scale(0.7);
   }
 
-  .whatis__layer--core[aria-pressed="true"],
-  .whatis__layer--core:hover {
-    background: linear-gradient(135deg, var(--color-thermal-600), #d97706);
-    padding-inline-start: var(--space-8);
+  .stack__close-btn:hover {
+    background: var(--color-thermal-600);
+    transform: scale(1.1);
   }
 
-  /* Cross section label */
+  .stack__close-btn.is-visible {
+    opacity: 1;
+    pointer-events: all;
+    transform: scale(1);
+  }
+
+  /* ── Cross label ── */
   .whatis__cross-label {
     display: flex;
     align-items: center;
     gap: var(--space-3);
-    margin-top: var(--space-2);
+    opacity: 0;
+    transition: opacity 0.4s ease 0.5s;
+  }
+
+  .whatis__cross-label.is-open {
+    opacity: 1;
   }
 
   .whatis__cross-line {
@@ -276,7 +456,7 @@ const layers = [
     white-space: nowrap;
   }
 
-  /* ── Detail panel (right) ── */
+  /* ── Detail panel ── */
   .whatis__detail {
     position: relative;
     min-height: 280px;
@@ -294,14 +474,8 @@ const layers = [
   }
 
   @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
   .whatis__detail-badge {
@@ -372,21 +546,57 @@ const layers = [
 
 <script>
   function initWhatIs() {
-    const layers = document.querySelectorAll<HTMLButtonElement>(".whatis__layer");
-    const details = document.querySelectorAll<HTMLDivElement>(".whatis__detail-item");
+    const wrapper    = document.getElementById("stackWrapper");
+    const openBtn    = document.getElementById("stackOpenBtn");
+    const closeBtn   = document.getElementById("stackCloseBtn");
+    const crossLabel = document.getElementById("stackCrossLabel");
+    const topBtn     = document.getElementById("stackTop") as HTMLButtonElement | null;
+    const coreBtn    = document.getElementById("stackCore") as HTMLButtonElement | null;
+    const botBtn     = document.getElementById("stackBot") as HTMLButtonElement | null;
+    const details    = document.querySelectorAll<HTMLDivElement>(".whatis__detail-item");
 
-    if (!layers.length) return;
+    if (!wrapper || !openBtn || !closeBtn || !topBtn || !coreBtn || !botBtn) return;
 
-    layers.forEach((btn, i) => {
-      btn.addEventListener("click", () => {
-        // Update buttons
-        layers.forEach((b) => b.setAttribute("aria-pressed", "false"));
-        btn.setAttribute("aria-pressed", "true");
+    // A partir de aquí TS sabe que no son null
+    const w  = wrapper;
+    const cb = closeBtn;
+    const cl = crossLabel;
 
-        // Update detail panels
-        details.forEach((d) => d.classList.remove("is-active"));
-        details[i]?.classList.add("is-active");
+    const clickables = [topBtn, coreBtn, botBtn];
+
+    function setActive(index: number) {
+      clickables.forEach((btn) => btn.classList.remove("is-active"));
+      clickables[index].classList.add("is-active");
+      details.forEach((d) => d.classList.remove("is-active"));
+      details[index]?.classList.add("is-active");
+    }
+
+    function openStack() {
+      w.classList.add("is-open");
+      cb.classList.add("is-visible");
+      cl?.classList.add("is-open");
+      clickables.forEach((btn) => {
+        btn.classList.add("is-clickable");
+        btn.disabled = false;
       });
+      setActive(1);
+    }
+
+    function closeStack() {
+      w.classList.remove("is-open");
+      cb.classList.remove("is-visible");
+      cl?.classList.remove("is-open");
+      clickables.forEach((btn) => {
+        btn.classList.remove("is-clickable", "is-active");
+        btn.disabled = true;
+      });
+    }
+
+    openBtn.addEventListener("click", openStack);
+    cb.addEventListener("click", closeStack);
+
+    clickables.forEach((btn, i) => {
+      btn.addEventListener("click", () => setActive(i));
     });
   }
 

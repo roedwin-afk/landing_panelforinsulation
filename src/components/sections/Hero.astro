@@ -21,6 +21,12 @@ const prefix = lang === "es" ? `${base}es/` : base;
     <div class="hero__bg-grid"></div>
   </div>
 
+   <div class="hero__heat">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
   <div class="container hero__container">
 
     <!-- Left column -->
@@ -426,5 +432,67 @@ const prefix = lang === "es" ? `${base}es/` : base;
   .hero__card-cta:hover {
     background: rgb(255 255 255 / 0.1);
     color: white;
+  }
+
+
+  /* ── Heat distortion effect ── */
+  .hero__heat {
+    position: absolute;
+    bottom: -12rem;
+    right: -12rem;
+    width: 34rem;
+    height: 44rem;
+    pointer-events: none;
+  }
+
+  .hero__heat span {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -68%);
+  }
+
+  .hero__heat span:nth-child(1) {
+    width: 22rem;
+    height: 32rem;
+    border-radius: 42% 58% 30% 70% / 45% 35% 65% 55%;
+    background: radial-gradient(
+      ellipse at 35% 65%,
+      rgb(234 88 12 / 0.22) 0%,
+      rgb(249 115 22 / 0.10) 45%,
+      transparent 70%
+    );
+    animation: heat-rotate 7s linear infinite;
+  }
+
+  .hero__heat span:nth-child(2) {
+    width: 30rem;
+    height: 42rem;
+    border-radius: 58% 42% 65% 35% / 55% 65% 35% 45%;
+    background: radial-gradient(
+      ellipse at 40% 70%,
+      rgb(194 65 12 / 0.15) 0%,
+      rgb(234 88 12 / 0.06) 50%,
+      transparent 72%
+    );
+    animation: heat-rotate 12s linear infinite reverse;
+  }
+
+  .hero__heat span:nth-child(3) {
+    width: 38rem;
+    height: 48rem;
+    border-radius: 35% 65% 55% 45% / 60% 40% 60% 40%;
+    background: radial-gradient(
+      ellipse at 45% 72%,
+      rgb(249 115 22 / 0.08) 0%,
+      rgb(234 88 12 / 0.03) 55%,
+      transparent 75%
+    );
+    animation: heat-rotate 17s linear infinite;
+  }
+
+  @keyframes heat-rotate {
+    0%   { transform: translate(-50%, -68%) rotate(0deg); }
+    100% { transform: translate(-50%, -68%) rotate(360deg); }
   }
 </style>

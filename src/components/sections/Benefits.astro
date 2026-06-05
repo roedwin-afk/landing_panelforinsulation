@@ -31,8 +31,13 @@ const items = [
 ---
 
 <section id="benefits" class="benefits">
+  <!-- Animated background -->
+  <div class="benefits__bg" aria-hidden="true">
+    <div class="benefits__orb benefits__orb--1"></div>
+    <div class="benefits__orb benefits__orb--2"></div>
+    <div class="benefits__orb benefits__orb--3"></div>
+  </div>
   <div class="container">
-
     <!-- Header -->
     <div class="benefits__header reveal">
       <span class="benefits__badge">{t.benefits.badge}</span>
@@ -42,9 +47,12 @@ const items = [
 
     <!-- Grid -->
     <div class="benefits__grid">
-
       <!-- Featured item (first) -->
-      <div class="benefits__item benefits__item--featured reveal" data-delay="0">
+      <div
+        class="benefits__item benefits__item--featured reveal"
+        data-delay="0"
+      >
+        <div class="card-light"></div>
         <div class="benefits__item-icon benefits__item-icon--emerald">
           <Zap size={28} />
         </div>
@@ -59,6 +67,7 @@ const items = [
       <!-- Right column: two stacked items -->
       <div class="benefits__col">
         <div class="benefits__item reveal" data-delay="100">
+          <div class="card-light"></div>
           <div class="benefits__item-icon benefits__item-icon--blue">
             <CloudRain size={22} />
           </div>
@@ -68,6 +77,7 @@ const items = [
         </div>
 
         <div class="benefits__item reveal" data-delay="200">
+          <div class="card-light"></div>
           <div class="benefits__item-icon benefits__item-icon--amber">
             <Flame size={22} />
           </div>
@@ -76,7 +86,6 @@ const items = [
           <p class="benefits__item-desc">{items[2].desc}</p>
         </div>
       </div>
-
     </div>
   </div>
 </section>
@@ -144,15 +153,17 @@ const items = [
   /* ── Item base ── */
   .benefits__item {
     position: relative;
-    background: white;
-    border: 1px solid var(--color-slate-100);
+    background: var(--color-brand-50);
+    border: 1px solid var(--color-brand-100);
     border-radius: var(--radius-2xl);
     padding: var(--space-8);
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
     box-shadow: var(--shadow-sm);
-    transition: box-shadow 0.25s ease, transform 0.25s ease;
+    transition:
+      box-shadow 0.25s ease,
+      transform 0.25s ease;
     overflow: hidden;
   }
 
@@ -254,4 +265,64 @@ const items = [
     color: var(--color-brand-400);
     letter-spacing: 0.04em;
   }
+
+  /* ── Card light effect ── */
+  .card-light {
+    top: 0;
+    left: 0;
+    opacity: 0;
+    content: "";
+    width: 100%;
+    height: 100%;
+    display: block;
+    transition: opacity 0.4s ease;
+    position: absolute;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(
+      circle at var(--mx, 50%) var(--my, 50%),
+      rgb(22 163 74 / 0.15),
+      transparent 60%
+    );
+  }
+
+  /* En la featured, el light es más intenso y verde */
+  .benefits__item--featured .card-light {
+    background: radial-gradient(
+      circle at var(--mx, 80%) var(--my, 30%),
+      rgb(74 222 128 / 0.25),
+      transparent 60%
+    );
+  }
+
+  .benefits__item:hover .card-light {
+    opacity: 1;
+  }
+
+  /* Asegurar que el contenido quede sobre el light */
+  .benefits__item > *:not(.card-light) {
+    position: relative;
+    z-index: 1;
+  }
 </style>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".benefits__item").forEach((card) => {
+    const light = card.querySelector<HTMLElement>(".card-light");
+    if (!light) return;
+
+    card.addEventListener("mousemove", (e: MouseEvent) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty("--mx", `${x}%`);
+      card.style.setProperty("--my", `${y}%`);
+    });
+
+    card.addEventListener("mouseleave", () => {
+      card.style.removeProperty("--mx");
+      card.style.removeProperty("--my");
+    });
+  });
+</script>
