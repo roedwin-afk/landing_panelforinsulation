@@ -4,6 +4,8 @@ import Hero from "../../components/sections/Hero.astro";
 import WhatIs from "../../components/sections/WhatIs.astro";
 import Benefits from "../../components/sections/Benefits.astro";
 import Calculator from "../../components/sections/Calculator.astro";
+import Trends from "../../components/sections/Trends.astro";
+import Download from "../../components/sections/Download.astro";
 import { getLang, useTranslations } from "../../i18n/utils";
 
 const lang = getLang(Astro.url, import.meta.env.BASE_URL);
@@ -16,5 +18,7 @@ const t = useTranslations(lang);
     <WhatIs t={t} lang={lang} />
     <Benefits t={t} />
     <Calculator t={t} />
+    <Trends t={t} />
+    <Download t={t} lang={lang} />
   </main>
 </Layout>

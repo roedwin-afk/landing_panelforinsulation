@@ -8,6 +8,7 @@ export const es: TranslationKeys = {
     trends: "Tendencias de Sostenibilidad",
     cta: "Guía Gratuita",
     blog: "Blog",
+    contact: "Contacto",
   },
   hero: {
     badge: "Portal de Construcción Inteligente",
@@ -140,7 +141,7 @@ export const es: TranslationKeys = {
   footer: {
     description:
       "Una plataforma educativa dedicada a ayudar a constructores, arquitectos y compradores a seleccionar tecnología de paneles de aislamiento optimizada, sostenible y confiable.",
-    networksTitle: "Redes del Grupo",
+    networksTitle: "Contáctanos",
     resourcesTitle: "Recursos",
     links: {
       coreComparison: "Tabla Comparativa de Núcleos",
@@ -148,5 +149,48 @@ export const es: TranslationKeys = {
       standards: "Estándares de Ingeniería Térmica",
     },
     copyright: "Todos los derechos reservados. Este sitio es estrictamente informativo.",
+  },
+  contact: {
+    pageTitle: "Contáctanos | Panel For Insulation",
+    pageDesc: "Ponte en contacto con nuestro equipo para asesoría experta en paneles sándwich aislados.",
+    badge: "Ponte en Contacto",
+    title: "Contacta a Nuestro Equipo",
+    description: "¿Tienes preguntas sobre paneles sándwich, recomendaciones de grosor o precios? Nuestro equipo de expertos está listo para ayudarte a tomar la decisión correcta.",
+    info: {
+      title: "Información de Contacto",
+      email: "ventas@mequipo.com",
+      phone: "+52 55 9990 3546",
+      address: "Avenida Presidente Masaryk No. 61, Int. 901, Polanco V Sección, C.P. 11560, Miguel Hidalgo, Mexico City, Mexico",
+      googleMaps: "https://maps.google.com/?cid=2583256201053688361&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ",
+    },
+    social: {
+      title: "Síguenos",
+    },
+    form: {
+      title: "Envíanos un Mensaje",
+      labelName: "Nombre Completo",
+      placeholderName: "Juan García",
+      labelEmail: "Correo Empresarial",
+      placeholderEmail: "juan@ejemplo.com",
+      labelPhone: "Teléfono (opcional)",
+      placeholderPhone: "+52 55 0000 0000",
+      labelProject: "Tipo de Proyecto",
+      projects: {
+        select: "Selecciona un tipo de proyecto",
+        cold: "Almacenamiento Frío",
+        industrial: "Industrial / Almacén",
+        residential: "Residencial",
+        commercial: "Comercial",
+        other: "Otro",
+      },
+      labelMessage: "Mensaje",
+      placeholderMessage: "Cuéntanos sobre tu proyecto...",
+      submit: "Enviar Mensaje",
+      successTitle: "¡Mensaje Enviado!",
+      successMsg: "Gracias por contactarnos. Te responderemos en menos de 24 horas.",
+    },
+    map: {
+      title: "Nuestra Ubicación",
+    },
   },
 };

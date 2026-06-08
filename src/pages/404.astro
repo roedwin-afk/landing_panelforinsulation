@@ -1,0 +1,164 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/layout/Navbar.astro";
+import Footer from "../components/layout/Footer.astro";
+import { getLang, useTranslations, getAlternatePath } from "../i18n/utils";
+
+const lang = getLang(Astro.url, import.meta.env.BASE_URL);
+const t = useTranslations(lang);
+
+const prefix = lang === "es" ? `${import.meta.env.BASE_URL}es/` : import.meta.env.BASE_URL;
+---
+
+<Layout t={t} lang={lang} title="404 | Page Not Found">
+  <main class="not-found">
+    <div class="not-found__inner">
+
+      <!-- Decorative number -->
+      <div class="not-found__number" aria-hidden="true">404</div>
+
+      <div class="not-found__content">
+        <span class="not-found__badge">Page Not Found</span>
+        <h1 class="not-found__title">Oops, this page doesn't exist</h1>
+        <p class="not-found__desc">
+          The page you're looking for may have been moved, deleted, or never existed.
+          Let's get you back on track.
+        </p>
+        <div class="not-found__actions">
+          <a href={prefix} class="not-found__btn-primary">
+            Back to Home
+          </a>
+          <a href={`${import.meta.env.BASE_URL}contact/`} class="not-found__btn-secondary">
+            Contact Us
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .not-found {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-slate-50);
+    padding-block: var(--space-20);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .not-found__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-6);
+    max-width: 36rem;
+    padding-inline: var(--space-4);
+  }
+
+  /* ── Decorative 404 ── */
+  .not-found__number {
+    position: absolute;
+    font-size: clamp(8rem, 20vw, 16rem);
+    font-weight: 800;
+    color: var(--color-slate-100);
+    letter-spacing: -0.05em;
+    line-height: 1;
+    user-select: none;
+    z-index: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+  }
+
+  /* ── Content ── */
+  .not-found__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .not-found__badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-thermal-600);
+    padding: var(--space-1) var(--space-3);
+    background: var(--color-thermal-50);
+    border-radius: var(--radius-full);
+    border: 1px solid rgb(249 115 22 / 0.2);
+  }
+
+  .not-found__title {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 800;
+    color: var(--color-slate-900);
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+  }
+
+  .not-found__desc {
+    font-size: 1rem;
+    color: var(--color-slate-500);
+    line-height: 1.7;
+    max-width: 28rem;
+  }
+
+  .not-found__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    justify-content: center;
+    margin-top: var(--space-2);
+  }
+
+  .not-found__btn-primary {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-3) var(--space-6);
+    background: var(--color-brand-600);
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: var(--radius-md);
+    transition: background 0.2s, transform 0.2s;
+    box-shadow: 0 2px 12px rgb(22 163 74 / 0.25);
+  }
+
+  .not-found__btn-primary:hover {
+    background: var(--color-brand-700);
+    transform: translateY(-1px);
+  }
+
+  .not-found__btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-3) var(--space-6);
+    background: white;
+    color: var(--color-slate-700);
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-slate-200);
+    transition: all 0.2s;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .not-found__btn-secondary:hover {
+    border-color: var(--color-slate-300);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+</style>

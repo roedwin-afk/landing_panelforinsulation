@@ -5,6 +5,8 @@ import type { TranslationKeys } from "../../i18n/en";
 import type { Lang } from "../../i18n/utils";
 import { getAlternatePath } from "../../i18n/utils";
 import { Layers } from "lucide-astro";
+import { Image } from "astro:assets";
+import logo from "../../assets/logo.svg";
 
 interface Props {
   t: TranslationKeys;
@@ -18,22 +20,27 @@ const prefix = lang === "es" ? `${base}es/` : base;
 const alternateLang = lang === "en" ? "es" : "en";
 // const alternatePath = lang === "en" ? `${base}es/` : base;
 const alternatePath = getAlternatePath(Astro.url, base);
+
+console.log("Alternate path:", alternatePath);
 ---
 
 <header class="navbar">
   <div class="container navbar__inner">
-
     <!-- Logo -->
     <a href={prefix} class="navbar__logo">
       <div class="navbar__logo-icon">
         <Layers size={22} />
       </div>
-      <div>
-        <span class="navbar__logo-text">
-          panel<span class="navbar__logo-accent">for</span>insulation<span class="navbar__logo-dot">.com</span>
-        </span>
-        <p class="navbar__logo-sub">The Buyer's Knowledge Hub</p>
-      </div>
+      <Image
+        src={logo}
+        alt="Panel sándwich para techo industrial"
+        width={200}
+        height={50}
+        class="navbar__logo-img"
+        format="svg"
+        quality={85}
+        loading="eager"
+      />
     </a>
 
     <!-- Desktop Nav -->
@@ -44,13 +51,17 @@ const alternatePath = getAlternatePath(Astro.url, base);
     <!-- Right actions -->
     <div class="navbar__actions">
       <!-- Language switcher -->
-      <a href={alternatePath} class="navbar__lang-switch" aria-label="Switch language">
+      <a
+        href={alternatePath}
+        class="navbar__lang-switch"
+        aria-label="Switch language"
+      >
         {alternateLang.toUpperCase()}
       </a>
 
       <!-- CTA -->
-      <a href={`${prefix}#download-guide`} class="navbar__cta">
-        {t.nav.cta}
+      <a href={`${base}contact/`} class="navbar__cta">
+        {t.nav.contact}
       </a>
 
       <!-- Mobile toggle -->
@@ -95,6 +106,12 @@ const alternatePath = getAlternatePath(Astro.url, base);
     align-items: center;
     gap: var(--space-3);
     text-decoration: none;
+  }
+
+  .navbar__logo-img {
+    display: block;
+    height: 3rem;
+    width: auto;
   }
 
   .navbar__logo-icon {
@@ -176,7 +193,9 @@ const alternatePath = getAlternatePath(Astro.url, base);
     font-size: 0.875rem;
     font-weight: 600;
     border-radius: var(--radius-md);
-    transition: background 0.2s ease, box-shadow 0.2s ease;
+    transition:
+      background 0.2s ease,
+      box-shadow 0.2s ease;
     box-shadow: 0 2px 8px rgb(22 163 74 / 0.25);
   }
 

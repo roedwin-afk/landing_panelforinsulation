@@ -6,6 +6,7 @@ export const en = {
     trends: "Sustainability Trends",
     cta: "Free Buyer's Guide",
     blog: "Blog",
+    contact: "Contact",
   },
   hero: {
     badge: "Smart Construction Portal",
@@ -130,7 +131,7 @@ export const en = {
     placeholderName: "John Doe",
     labelEmail: "Business Email",
     placeholderEmail: "john@example.com",
-    submitBtn: "Get My Free Buyer Guide (PDF)",
+    submitBtn: "Get Our Free Buyer Guide (PDF)",
     successTitle: "Success!",
     successMsg: "We have sent the PDF download link directly to",
     successMsgEnd: ". Check your inbox shortly!",
@@ -138,7 +139,7 @@ export const en = {
   footer: {
     description:
       "An educational platform dedicated to helping builders, architects, and buyers select optimized, sustainable, and reliable insulation panel technology.",
-    networksTitle: "Group Networks",
+    networksTitle: "Contact Us",
     resourcesTitle: "Resources",
     links: {
       coreComparison: "Core Comparison Chart",
@@ -146,6 +147,50 @@ export const en = {
       standards: "Thermal Engineering Standards",
     },
     copyright: "All rights reserved. This site is strictly for informational purposes.",
+    
+  },
+  contact: {
+    pageTitle: "Contact Us | Panel For Insulation",
+    pageDesc: "Get in touch with our team for expert advice on insulated sandwich panels.",
+    badge: "Get In Touch",
+    title: "Contact Our Team",
+    description: "Have questions about sandwich panels, thickness recommendations, or pricing? Our team of experts is ready to help you make the right decision.",
+    info: {
+      title: "Contact Information",
+      email: "ventas@mequipo.com",
+      phone: "+52 55 9990 3546",
+      address: "Avenida Presidente Masaryk No. 61, Int. 901, Polanco V Sección, C.P. 11560, Miguel Hidalgo, Mexico City, Mexico",
+      googleMaps: "https://maps.google.com/?cid=2583256201053688361&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ",
+    },
+    social: {
+      title: "Follow Us",
+    },
+    form: {
+      title: "Send Us a Message",
+      labelName: "Full Name",
+      placeholderName: "John Doe",
+      labelEmail: "Business Email",
+      placeholderEmail: "john@example.com",
+      labelPhone: "Phone Number (optional)",
+      placeholderPhone: "+1 555 000 0000",
+      labelProject: "Project Type",
+      projects: {
+        select: "Select a project type",
+        cold: "Cold Storage",
+        industrial: "Industrial / Warehouse",
+        residential: "Residential",
+        commercial: "Commercial",
+        other: "Other",
+      },
+      labelMessage: "Message",
+      placeholderMessage: "Tell us about your project...",
+      submit: "Send Message",
+      successTitle: "Message Sent!",
+      successMsg: "Thank you for reaching out. We'll get back to you within 24 hours.",
+    },
+    map: {
+      title: "Our Location",
+    },
   },
 } as const;
 
