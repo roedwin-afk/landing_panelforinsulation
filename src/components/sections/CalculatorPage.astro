@@ -1,0 +1,527 @@
+---
+import type { TranslationKeys } from "../../i18n/en";
+import type { Lang } from "../../i18n/utils";
+
+interface Props {
+  t: TranslationKeys;
+  lang: Lang;
+}
+
+const { t, lang } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const contactHref = lang === "en" ? `${base}contact/` : `${base}es/contact/`;
+---
+
+<!-- ══════════════════════════════════════════
+     HERO BANNER
+══════════════════════════════════════════ -->
+<section class="calc-hero">
+  <div class="container">
+    <span class="badge">{t.calculatorPage.badge}</span>
+    <h1 class="calc-hero__title">{t.calculatorPage.title}</h1>
+    <p class="calc-hero__desc">{t.calculatorPage.description}</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CALCULATOR CARD
+══════════════════════════════════════════ -->
+<section class="calc-section">
+  <div class="container">
+    <div class="calc-grid">
+
+      <!-- ── SELECTORS ── -->
+      <div class="selectors-panel">
+
+        <!-- Step 1: Project Type -->
+        <div class="selector-group">
+          <label class="selector-label">{t.calculatorPage.labelType}</label>
+          <div class="btn-group" id="type-group">
+            <button class="sel-btn active" data-group="type" data-value="cold">
+              🏭 {t.calculatorPage.types.cold}
+            </button>
+            <button class="sel-btn" data-group="type" data-value="industrial">
+              🏗️ {t.calculatorPage.types.industrial}
+            </button>
+            <button class="sel-btn" data-group="type" data-value="residential">
+              🏠 {t.calculatorPage.types.residential}
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2: Climate -->
+        <div class="selector-group">
+          <label class="selector-label">{t.calculatorPage.labelClimate}</label>
+          <div class="btn-group" id="climate-group">
+            <button class="sel-btn active" data-group="climate" data-value="extreme">
+              ❄️ {t.calculatorPage.climates.extreme}
+            </button>
+            <button class="sel-btn" data-group="climate" data-value="moderate">
+              🌤️ {t.calculatorPage.climates.moderate}
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 3: Core Material -->
+        <div class="selector-group">
+          <label class="selector-label">{t.calculatorPage.labelCore}</label>
+          <div class="btn-group" id="core-group">
+            <button class="sel-btn active" data-group="core" data-value="pir">
+              🔬 {t.calculatorPage.cores.pir}
+            </button>
+            <button class="sel-btn" data-group="core" data-value="pur">
+              💧 {t.calculatorPage.cores.pur}
+            </button>
+            <button class="sel-btn" data-group="core" data-value="wool">
+              🔥 {t.calculatorPage.cores.wool}
+            </button>
+          </div>
+
+          <!-- Core note pill — data-* carries all translations for JS -->
+          <p
+            class="core-note"
+            id="core-note"
+            data-pir={t.calculatorPage.coreNote.pir}
+            data-pur={t.calculatorPage.coreNote.pur}
+            data-wool={t.calculatorPage.coreNote.wool}
+          >{t.calculatorPage.coreNote.pir}</p>
+        </div>
+      </div>
+
+      <!-- ── RESULT PANEL ── -->
+      <div class="result-panel">
+        <span class="badge badge--result">{t.calculatorPage.result.badge}</span>
+        <h2 class="result-title">{t.calculatorPage.result.title}</h2>
+
+        <!-- Thickness visual -->
+        <div class="thickness-visual">
+          <div class="thickness-bar-wrap">
+            <div class="thickness-bar" id="thickness-bar"></div>
+          </div>
+          <div class="thickness-value" id="thickness-value">150 mm</div>
+        </div>
+
+        <!-- Metrics grid -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <span class="metric-label">{t.calculatorPage.result.labelR}</span>
+            <span class="metric-value" id="result-r">—</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">{t.calculatorPage.result.labelU}</span>
+            <span class="metric-value" id="result-u">—</span>
+          </div>
+          <div class="metric-card metric-card--wide">
+            <span class="metric-label">{t.calculatorPage.result.labelLambda}</span>
+            <span class="metric-value" id="result-lambda">—</span>
+          </div>
+          <div class="metric-card metric-card--wide">
+            <span class="metric-label">{t.calculatorPage.result.labelDesc}</span>
+            <span class="metric-value metric-value--desc" id="result-desc">—</span>
+          </div>
+        </div>
+
+        <p class="disclaimer">{t.calculatorPage.disclaimer}</p>
+      </div>
+    </div>
+
+    <!-- ── CTA BANNER ── -->
+    <div class="cta-banner reveal">
+      <div class="cta-banner__text">
+        <h3>{t.calculatorPage.ctaTitle}</h3>
+        <p>{t.calculatorPage.ctaDesc}</p>
+      </div>
+      <a href={contactHref} class="cta-banner__btn">
+        {t.calculatorPage.ctaBtn} →
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     DATA + LOGIC
+══════════════════════════════════════════ -->
+<script>
+  const DATA: Record<string, Record<string, Record<string, {
+    thickness: number; rValue: number; uValue: number; lambda: number; desc: string;
+  }>>> = {
+    cold: {
+      extreme: {
+        pir:  { thickness: 150, rValue: 6.82, uValue: 0.15, lambda: 0.022, desc: "Deep-freeze cold room (−25 °C)" },
+        pur:  { thickness: 160, rValue: 6.40, uValue: 0.16, lambda: 0.025, desc: "Deep-freeze cold room (−25 °C)" },
+        wool: { thickness: 200, rValue: 5.71, uValue: 0.18, lambda: 0.035, desc: "Deep-freeze cold room (−25 °C)" },
+      },
+      moderate: {
+        pir:  { thickness: 100, rValue: 4.55, uValue: 0.22, lambda: 0.022, desc: "Chilled storage (+2 °C to +8 °C)" },
+        pur:  { thickness: 120, rValue: 4.80, uValue: 0.21, lambda: 0.025, desc: "Chilled storage (+2 °C to +8 °C)" },
+        wool: { thickness: 150, rValue: 4.29, uValue: 0.23, lambda: 0.035, desc: "Chilled storage (+2 °C to +8 °C)" },
+      },
+    },
+    industrial: {
+      extreme: {
+        pir:  { thickness: 100, rValue: 4.55, uValue: 0.22, lambda: 0.022, desc: "Heavy-duty industrial envelope" },
+        pur:  { thickness: 120, rValue: 4.80, uValue: 0.21, lambda: 0.025, desc: "Heavy-duty industrial envelope" },
+        wool: { thickness: 150, rValue: 4.29, uValue: 0.23, lambda: 0.035, desc: "Fire-rated industrial envelope" },
+      },
+      moderate: {
+        pir:  { thickness:  80, rValue: 3.64, uValue: 0.28, lambda: 0.022, desc: "Standard warehouse / logistics" },
+        pur:  { thickness: 100, rValue: 4.00, uValue: 0.25, lambda: 0.025, desc: "Standard warehouse / logistics" },
+        wool: { thickness: 120, rValue: 3.43, uValue: 0.29, lambda: 0.035, desc: "Standard warehouse / logistics" },
+      },
+    },
+    residential: {
+      extreme: {
+        pir:  { thickness:  80, rValue: 3.64, uValue: 0.28, lambda: 0.022, desc: "High-performance residential wall" },
+        pur:  { thickness: 100, rValue: 4.00, uValue: 0.25, lambda: 0.025, desc: "High-performance residential wall" },
+        wool: { thickness: 120, rValue: 3.43, uValue: 0.29, lambda: 0.035, desc: "High-performance residential wall" },
+      },
+      moderate: {
+        pir:  { thickness:  60, rValue: 2.73, uValue: 0.37, lambda: 0.022, desc: "Standard residential / commercial" },
+        pur:  { thickness:  80, rValue: 3.20, uValue: 0.31, lambda: 0.025, desc: "Standard residential / commercial" },
+        wool: { thickness: 100, rValue: 2.86, uValue: 0.35, lambda: 0.035, desc: "Standard residential / commercial" },
+      },
+    },
+  };
+
+  function initCalculator() {
+    const state = { type: "cold", climate: "extreme", core: "pir" };
+
+    function get<T extends HTMLElement>(id: string) {
+      return document.getElementById(id) as T | null;
+    }
+
+    function updateResult() {
+      const d = DATA[state.type][state.climate][state.core];
+      const bar   = get<HTMLDivElement>("thickness-bar");
+      const valEl = get<HTMLSpanElement>("thickness-value");
+
+      const pct = Math.round(((d.thickness - 60) / (200 - 60)) * 80 + 20);
+      if (bar)   bar.style.width = `${pct}%`;
+      if (valEl) valEl.textContent = `${d.thickness} mm`;
+
+      const set = (id: string, val: string) => { const el = get(id); if (el) el.textContent = val; };
+      set("result-r",      `${d.rValue.toFixed(2)} m²·K/W`);
+      set("result-u",      `${d.uValue.toFixed(2)} W/m²·K`);
+      set("result-lambda", `λ = ${d.lambda} W/(m·K)`);
+      set("result-desc",   d.desc);
+    }
+
+    document.querySelectorAll<HTMLButtonElement>(".sel-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const group = btn.dataset.group as "type" | "climate" | "core";
+        const value = btn.dataset.value!;
+
+        document.querySelectorAll<HTMLButtonElement>(`.sel-btn[data-group="${group}"]`)
+          .forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        state[group] = value;
+
+        if (group === "core") {
+          const noteEl = get("core-note");
+          if (noteEl) {
+            const notes: Record<string, string> = {
+              pir:  noteEl.dataset.pir  ?? "",
+              pur:  noteEl.dataset.pur  ?? "",
+              wool: noteEl.dataset.wool ?? "",
+            };
+            noteEl.textContent = notes[value] ?? "";
+          }
+        }
+
+        updateResult();
+      });
+    });
+
+    updateResult();
+  }
+
+  // Carga inicial
+  document.addEventListener("DOMContentLoaded", initCalculator);
+
+  // Re-inicializa después de cada swap de View Transitions
+  document.addEventListener("astro:after-swap", initCalculator);
+</script>
+
+<!-- ══════════════════════════════════════════
+     STYLES
+══════════════════════════════════════════ -->
+<style>
+  /* ── Hero ── */
+  .calc-hero {
+    background: linear-gradient(135deg, var(--color-slate-900) 0%, var(--color-slate-800) 100%);
+    padding: var(--space-16) 0 var(--space-12);
+    text-align: center;
+  }
+
+  .calc-hero__title {
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: 800;
+    color: #fff;
+    margin: var(--space-4) 0 var(--space-4);
+    line-height: 1.2;
+  }
+
+  .calc-hero__desc {
+    max-width: 640px;
+    margin-inline: auto;
+    color: var(--color-slate-300);
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  /* ── Badge ── */
+  .badge {
+    display: inline-block;
+    background: var(--color-brand-500);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.9rem;
+    border-radius: var(--radius-full);
+  }
+
+  .badge--result {
+    background: var(--color-thermal-500);
+  }
+
+  /* ── Section ── */
+  .calc-section {
+    padding: var(--space-16) 0 var(--space-20);
+    background: var(--color-slate-50);
+  }
+
+  /* ── Grid ── */
+  .calc-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    margin-bottom: var(--space-12);
+  }
+
+  @media (min-width: 1024px) {
+    .calc-grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+    }
+  }
+
+  /* ── Selectors Panel ── */
+  .selectors-panel {
+    background: #fff;
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .selector-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .selector-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-slate-600);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .sel-btn {
+    width: 100%;
+    text-align: left;
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-md);
+    border: 2px solid var(--color-slate-200);
+    background: var(--color-slate-50);
+    color: var(--color-slate-700);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.15s;
+    cursor: pointer;
+  }
+
+  .sel-btn:hover {
+    border-color: var(--color-brand-400);
+    background: var(--color-brand-50);
+    transform: translateX(3px);
+  }
+
+  .sel-btn.active {
+    border-color: var(--color-brand-500);
+    background: var(--color-brand-50);
+    color: var(--color-brand-700);
+    font-weight: 700;
+  }
+
+  .core-note {
+    font-size: 0.82rem;
+    color: var(--color-brand-700);
+    background: var(--color-brand-50);
+    border-left: 3px solid var(--color-brand-500);
+    padding: var(--space-2) var(--space-3);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin-top: var(--space-1);
+    transition: all 0.3s ease;
+  }
+
+  /* ── Result Panel ── */
+  .result-panel {
+    background: var(--color-slate-900);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    box-shadow: var(--shadow-xl);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    position: sticky;
+    top: 5rem;
+  }
+
+  .result-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #fff;
+    margin-top: var(--space-2);
+  }
+
+  /* ── Thickness visual ── */
+  .thickness-visual {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .thickness-bar-wrap {
+    background: var(--color-slate-700);
+    border-radius: var(--radius-full);
+    height: 1.25rem;
+    overflow: hidden;
+  }
+
+  .thickness-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-brand-500), var(--color-thermal-500));
+    border-radius: var(--radius-full);
+    transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: 20%;
+  }
+
+  .thickness-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--color-brand-400);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  /* ── Metrics ── */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+  }
+
+  .metric-card {
+    background: var(--color-slate-800);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .metric-card--wide {
+    grid-column: span 2;
+  }
+
+  .metric-label {
+    font-size: 0.72rem;
+    color: var(--color-slate-400);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .metric-value {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-brand-400);
+  }
+
+  .metric-value--desc {
+    color: var(--color-slate-200);
+    font-size: 0.9rem;
+  }
+
+  .disclaimer {
+    font-size: 0.75rem;
+    color: var(--color-slate-500);
+    border-top: 1px solid var(--color-slate-700);
+    padding-top: var(--space-4);
+    line-height: 1.5;
+  }
+
+  /* ── CTA Banner ── */
+  .cta-banner {
+    background: linear-gradient(135deg, var(--color-brand-600), var(--color-brand-700));
+    border-radius: var(--radius-xl);
+    padding: var(--space-8) var(--space-10);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    align-items: flex-start;
+  }
+
+  @media (min-width: 768px) {
+    .cta-banner {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .cta-banner__text h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: var(--space-2);
+  }
+
+  .cta-banner__text p {
+    color: var(--color-brand-100);
+    font-size: 0.95rem;
+  }
+
+  .cta-banner__btn {
+    display: inline-block;
+    background: #fff;
+    color: var(--color-brand-700);
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: var(--space-4) var(--space-8);
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: var(--shadow-md);
+  }
+
+  .cta-banner__btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+</style>

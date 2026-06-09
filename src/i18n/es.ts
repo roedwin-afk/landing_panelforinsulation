@@ -193,4 +193,46 @@ export const es: TranslationKeys = {
       title: "Nuestra Ubicación",
     },
   },
+  calculatorPage: {
+    pageTitle: "Calculadora de Grosor de Panel Sándwich | Panel For Insulation",
+    pageDesc: "Encuentra el grosor de aislamiento óptimo para tu proyecto. Compara núcleos PIR, PUR y Lana Mineral en diferentes climas y tipos de construcción.",
+    badge: "Calculadora Interactiva",
+    title: "¿Cómo Elegir el Grosor Correcto?",
+    description:
+      "Elegir el grosor correcto del núcleo evita peso estructural innecesario y elimina ineficiencias energéticas a largo plazo. ¡Juega con nuestro selector interactivo!",
+    labelType: "1. Selecciona Aplicación / Tipo de Proyecto",
+    labelClimate: "2. Entorno Climático Promedio",
+    labelCore: "3. Material del Núcleo",
+    types: {
+      cold: "Almacenamiento Frío",
+      industrial: "Industrial",
+      residential: "Residencial",
+    },
+    climates: {
+      extreme: "Extremo (Invierno Severo / Congelación Profunda)",
+      moderate: "Clima Moderado",
+    },
+    cores: {
+      pir: "PIR (Poliisocianurato)",
+      pur: "PUR (Poliuretano)",
+      wool: "Lana Mineral",
+    },
+    coreNote: {
+      pir: "Mejor eficiencia térmica por mm. Ideal para proyectos con espacio limitado.",
+      pur: "Excelente resistencia a la humedad. Más común en almacenamiento frío.",
+      wool: "Resistencia superior al fuego. Ideal para edificios industriales de alto riesgo.",
+    },
+    result: {
+      badge: "Especificación Recomendada",
+      title: "Dimensiones Óptimas del Panel",
+      labelR: "Resistencia Térmica Estimada (R):",
+      labelU: "Valor U objetivo equivalente:",
+      labelDesc: "Objetivo de Aplicación Principal:",
+      labelLambda: "Conductividad del Núcleo (λ):",
+    },
+    disclaimer: "Los valores son indicativos. Consulta siempre a un ingeniero térmico certificado para especificaciones finales.",
+    ctaTitle: "¿Listo para obtener una cotización?",
+    ctaDesc: "Comparte los detalles de tu proyecto con nuestro equipo y obtén una recomendación personalizada.",
+    ctaBtn: "Contactar al Equipo",
+  },
 };

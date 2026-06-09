@@ -147,7 +147,7 @@ export const en = {
       standards: "Thermal Engineering Standards",
     },
     copyright: "All rights reserved. This site is strictly for informational purposes.",
-    
+
   },
   contact: {
     pageTitle: "Contact Us | Panel For Insulation",
@@ -191,6 +191,48 @@ export const en = {
     map: {
       title: "Our Location",
     },
+  },
+  calculatorPage: {
+    pageTitle: "Sandwich Panel Thickness Calculator | Panel For Insulation",
+    pageDesc: "Find the optimal insulation thickness for your project. Compare PIR, PUR and Mineral Wool cores across different climates and building types.",
+    badge: "Interactive Calculator",
+    title: "How to Choose the Correct Thickness?",
+    description:
+      "Choosing the correct core thickness avoids unnecessary upfront structural weight and eliminates energy inefficiencies down the road. Play around with our interactive selector below!",
+    labelType: "1. Select Application / Project Type",
+    labelClimate: "2. Average Climatic Environment",
+    labelCore: "3. Core Material",
+    types: {
+      cold: "Cold Storage",
+      industrial: "Industrial",
+      residential: "Residential",
+    },
+    climates: {
+      extreme: "Extreme (Severe Winter / Deep Freeze)",
+      moderate: "Moderate Climate",
+    },
+    cores: {
+      pir: "PIR (Polyisocyanurate)",
+      pur: "PUR (Polyurethane)",
+      wool: "Mineral Wool",
+    },
+    coreNote: {
+      pir: "Best thermal efficiency per mm. Ideal for space-constrained projects.",
+      pur: "Excellent moisture resistance. Most common in cold storage.",
+      wool: "Superior fire resistance. Best for industrial & high-risk buildings.",
+    },
+    result: {
+      badge: "Recommended Specification",
+      title: "Optimal Panel Dimensions",
+      labelR: "Estimated Thermal Resistance (R):",
+      labelU: "Target U-Value equivalent:",
+      labelDesc: "Primary Application Target:",
+      labelLambda: "Core Conductivity (λ):",
+    },
+    disclaimer: "Values are indicative. Always consult a certified thermal engineer for final specifications.",
+    ctaTitle: "Ready to get a quote?",
+    ctaDesc: "Share your project details with our team and get a tailored recommendation.",
+    ctaBtn: "Contact Our Team",
   },
 } as const;
 
